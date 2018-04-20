@@ -17,9 +17,11 @@
 package Arrays_And_Strings;
 
 /**
- *
+ *A good exercise to practice strings, arrays, and general data structures is to implement your own version of
+ * StringBuilder, HashTable and Array List. 
  * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
  */
 public class Question_1 {
     
+
 }
