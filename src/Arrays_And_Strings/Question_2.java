@@ -18,6 +18,7 @@ package Arrays_And_Strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <b>Q1.2 Check Permutation:</b> Given two strings, write a method to decide if
@@ -50,7 +51,7 @@ public class Question_2 {
         if (input.length() != check.length()) {
             return false;
         }
-        ArrayList list = new ArrayList();
+        List list = new ArrayList();
         list.add(input);
         doPermute(input.toCharArray(), 0, list);
         //System.out.println("Permutations (" + list.size() + "): " + list);
@@ -113,29 +114,44 @@ public class Question_2 {
     }
     
     /**
-     * Generates all permutations of the input string
-     * @param inputArray Input char array
+     * Generates all permutations of the input string (duplicates un-handled)
+     * @param inputArray input char array
      * @param position position where swap should start from
-     * @param permutations array list storing new permutations
+     * @param storage list storing new permutations
      */
-    static void doPermute(char[] inputArray, int position, ArrayList permutations) {
+      static void doPermute(char[] inputArray, int position, List storage) {
         if (position == inputArray.length - 1) {
-            return;
-        }
-        char selected;
-        char[] permutedArray;
+            //System.out.println(new String(inputArray));
+            storage.add(new String(inputArray));
+        } 
+        char[] tempArray =new char[inputArray.length];
+        System.arraycopy(inputArray, 0, tempArray, 0, inputArray.length); //to make sure array isnt passed by reference
         for (int i = position; i < inputArray.length; i++) {
-            permutedArray = deepCopyArray(inputArray);
-            selected = inputArray[position];
-            permutedArray[position] = inputArray[i];
-            permutedArray[i] = selected;
-            if (!Arrays.equals(permutedArray, inputArray)) {
-                permutations.add(new String(permutedArray));
-            }
-            doPermute(permutedArray, position + 1, permutations);
+            tempArray = switchPositions(tempArray, position, i);
+            doPermute(tempArray, position + 1, storage);
+            tempArray = switchPositions(tempArray, position, i);
         }
     }
-
+      
+      /**
+         * Used to switch spots in an array
+         * @param input input char array
+         * @param posA position a
+         * @param posB position b
+         * @return swapped array
+         */
+    static char[] switchPositions(char[] input, int posA, int posB) {
+        char temp = input[posA];
+        input[posA] = input[posB];
+        input[posB] = temp;
+        return input;
+    }
+    
+    /**
+     * Get deep copy of array
+     * @param input array to copy
+     * @return copied array
+     */
     private static char[] deepCopyArray(char[] input) {
         if (input == null) {
             return null;
@@ -151,7 +167,7 @@ public class Question_2 {
      * Question_2 main
      *
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         String word = "QWERTY";
         String check = "YTREWQ";
@@ -162,5 +178,5 @@ public class Question_2 {
         System.out.println("Is " + check + " a permutation of " + word + ": " + answer);
         answer = solve3(word, check);
         System.out.println("Is " + check + " a permutation of " + word + ": " + answer);
-    }
+    }*/
 }

@@ -150,9 +150,9 @@ public class Question_1 {
     }
 
     /**
-     *
+     * Question_1 main
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         boolean answer;
         String nonUnique = "Hello, how are you doing";
@@ -181,5 +181,5 @@ public class Question_1 {
         System.out.println("With No Data Structure, " + nonUnique + ": " + answer);
         answer = solve5(unique);
         System.out.println("With No Data Structure, " + unique + ": " + answer);
-    }
+    }*/
 }

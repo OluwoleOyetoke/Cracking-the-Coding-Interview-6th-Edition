@@ -48,45 +48,60 @@ public class Question_4 {
      * @param sentence sentence to check 
      * @return true/false true if sentence contains a permutation which is a palindrom
      */
-    static boolean solve2(String sentence){
-       boolean checker = false;
-       int[] charCount = new int[256]; //assuming extended ascii
-       char[] sentenceChar = sentence.replaceAll(" ", "").toCharArray();
-       //get char count
-       for(int i=0; i<sentenceChar.length; i++){
-           charCount[(int) sentenceChar[i]]++;
-            System.out.print(charCount[i]);
-       }
-       
-       
-       if((sentenceChar.length%2)==0){//an even length parlindrome should have the same character count
-           for(int i=0; i<charCount.length; i++){
-           if((charCount[i]%2)!=0){
-               return false;
-           }    
-           }
-           
-       }else{//an odd length palindrome should only have 1 character out of place
-           int oddCount=0;
-           for(int i=0; i<charCount.length; i++){
-           if((charCount[i]%2)!=0){
-               oddCount++;
-               return false;
-           }
-           }
-           if(oddCount>1){
-               return false;
-           }
-           
-           
-       }
-       
-       
-       
-       
-       
-      
-        return checker;
+    static boolean solve2(String sentence) {
+        int[] charCount = new int[256]; //assuming extended ascii
+        char[] sentenceChar = sentence.replaceAll(" ", "").toCharArray(); //replaces all spaces in sentence
+
+        //get char count
+        int pos = 0;
+        for (int i = 0; i < sentenceChar.length; i++) {
+            pos = (int) sentenceChar[i];
+            charCount[pos]++;
+        }
+
+        if ((sentenceChar.length % 2) == 0) {//an even length parlindrome should have even character count
+            for (int i = 0; i < charCount.length; i++) {
+
+                if ((charCount[i] % 2) != 0) {
+                    return false;
+                }
+            }
+            return true;
+
+        } else {//an odd length palindrome should only have 1 character out of place
+            int oddCount = 0;
+            for (int i = 0; i < charCount.length; i++) {
+                if ((charCount[i] % 2) != 0) {
+                    oddCount++;
+                    if (oddCount > 1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+    
+    /**
+     * Using the bit manipulation method (asuming only 26 letters of the English alphabet [a-z])
+     * @param sentence input string to check
+     * @return 
+     */
+    public static boolean solve3(String sentence){
+        int alphaBit = 0x0000000; //28 bits for  26 letters
+        int val=0;
+        sentence = sentence.replaceAll(" ", "");
+        for(int i=0; i<sentence.length(); i++){
+           val = 25 - (122 - (int) sentence.charAt(i));
+           alphaBit = alphaBit ^ (0x0000001<<val);
+        }
+        if((sentence.length()%2==0) && alphaBit==0 ){
+            return true;
+        }else if((sentence.length()%2!=0) && alphaBit>1 ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -216,14 +231,20 @@ public class Question_4 {
      * Question_4 main... uncomment to run
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
+        boolean answer2;
         String sentence = "tact coa";
         //solve method 1  
-        //solve(sentence);
-        //System.out.println("Palindrome? :"+answer);
+        solve(sentence);
+        System.out.println("Palindrome? :"+answer);
+        
         //solve method 2
-        boolean answer2 = solve2(sentence);
+        answer2 = solve2(sentence);
         System.out.println("Palindrome? :"+answer2);
-    }
+        
+        //solve method 2
+        answer2 = solve3(sentence);
+        System.out.println("Palindrome? :"+answer2);
+    }*/
 }

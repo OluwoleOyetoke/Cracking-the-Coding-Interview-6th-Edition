@@ -14,19 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package cracking.the.coding.interview_6th_edition;
+package CtCi_6th_Edition;
+
+import Arrays_And_Strings.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
  */
-public class CrackingTheCodingInterview_6th_Edition {
+public class CtCi_6th_Edition {
 
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
-        // TODO code application logic here
+
+
     }
-    
+*/
 }
