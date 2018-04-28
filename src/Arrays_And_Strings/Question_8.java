@@ -123,7 +123,7 @@ public class Question_8 {
      * Question_8 main method....uncomment to run
      *
      * @param args command line argument
-     */
+     *//*
     public static void main(String[] args) {
         
         int answer[][];
@@ -137,5 +137,5 @@ public class Question_8 {
         answer = solve2(image, 5, 5);
         print2D(answer);
         
-    }
+    }*/
 }
