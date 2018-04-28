@@ -16,7 +16,6 @@
  */
 package Arrays_And_Strings;
 
-import java.util.Arrays;
 
 /**
  * <b>One Away:</b> There are three types of edits that can be performed on
@@ -81,7 +80,11 @@ public class Question_5 {
 
         return true;
     }
-
+    
+    /**
+     * Question_5 main function
+     * @param args Command line arguments
+     *//*
     public static void main(String[] args) {
         boolean answer = false; 
         String[][] inputs = {{"pale", "ple"}, {"pales", "pale"}, {"pale", "bale"}, {"pale","bake"}, {"soccer", "ssoccerr"}};   
@@ -89,5 +92,5 @@ public class Question_5 {
              answer = solve(inputs[i][0], inputs[i][1]);
              System.out.println("Is '"+inputs[i][0]+"' 1 edit (del,add,replace) away from becoming '"+inputs[i][1]+"': "+answer);
          }
-    }
+    }*/
 }
