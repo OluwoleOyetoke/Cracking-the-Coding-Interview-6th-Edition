@@ -23,7 +23,7 @@ package Arrays_And_Strings;
  * string. (Note: If implementing in Java, please use a character array so that
  * you can perform this operation in place.)
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Question_3 {
 

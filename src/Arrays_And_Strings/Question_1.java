@@ -20,10 +20,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Implement an algorithm to determine if a string has all unique characters.
+ * <b>Is unique</b> Implement an algorithm to determine if a string has all unique characters.
  * What if you cannot use additional data structures?
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <} oluwoleoyetoke{@literal @} gmail.com {@literal>}
  */
 public class Question_1 {
 

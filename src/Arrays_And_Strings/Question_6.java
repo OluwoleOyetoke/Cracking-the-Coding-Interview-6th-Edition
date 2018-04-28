@@ -24,7 +24,7 @@ package Arrays_And_Strings;
  * original string. You can assume the string has only uppercase and lowercase
  * letters (a - z)....Page 91
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Question_6 {
     

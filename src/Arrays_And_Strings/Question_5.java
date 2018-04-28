@@ -23,7 +23,7 @@ package Arrays_And_Strings;
  * Given two strings, write a function to check if they are one edit (or zero
  * edits) away...page 91
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Question_5 {
     

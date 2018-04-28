@@ -25,7 +25,7 @@ import java.util.List;
  * the same forwards and backwards. A permutation is a rearrangement of letters.
  * The palindrome does not need to be limited to just dictionary words.__Page 91
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Question_4 {
     
@@ -83,9 +83,9 @@ public class Question_4 {
     }
     
     /**
-     * Using the bit manipulation method (asuming only 26 letters of the English alphabet [a-z])
+     * Using the bit manipulation method (assuming only 26 letters of the English alphabet [a-z])
      * @param sentence input string to check
-     * @return 
+     * @return  true/false return true if sentence is a permutation of a palindrome
      */
     public static boolean solve3(String sentence){
         int alphaBit = 0x0000000; //28 bits for  26 letters

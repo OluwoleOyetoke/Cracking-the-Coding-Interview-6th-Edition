@@ -21,10 +21,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * <b>Q1.2 Check Permutation:</b> Given two strings, write a method to decide if
+ * <b>Check Permutation:</b> Given two strings, write a method to decide if
  * one is a permutation of the other.
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Question_2 {
 

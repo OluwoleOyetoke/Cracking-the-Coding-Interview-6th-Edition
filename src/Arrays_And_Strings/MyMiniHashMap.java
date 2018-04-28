@@ -20,16 +20,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * <h1> Custom HasMap Implementation</h1>
+ * <h1><b>Custom HasMap Implementation</b></h1>
  * <p>
  * Page.90 CtCi: A good exercise to practice strings, arrays, and general data
  * structures is to implement your own version of StringBuilder, HashTable and
  * Array List.
  * </p>
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
- * @param <ValueType>
- * @param <KeyType>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
+ * @param <ValueType> type for the value e.g Integer
+ * @param <KeyType> type for the key e.g String
  */
 public class MyMiniHashMap<KeyType, ValueType> {
 
@@ -108,7 +109,7 @@ public class MyMiniHashMap<KeyType, ValueType> {
     /**
      * Clears and reinitializes the Hash map
      *
-     * @return true
+     *
      */
     public void clear() {
         for (int i = 0; i < size; i++) {
@@ -129,8 +130,8 @@ public class MyMiniHashMap<KeyType, ValueType> {
     /**
      * Checks if map contains key
      *
-     * @param key
-     * @return
+     * @param key hash map key
+     * @return true/false return true if contains key
      */
     public boolean containsKey(KeyType key) {
         Iterator<MapDatum> it;

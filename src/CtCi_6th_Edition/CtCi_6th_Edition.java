@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class CtCi_6th_Edition {
 
