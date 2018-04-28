@@ -96,7 +96,11 @@ public class Question_7 {
         }
         return image;
     }
-
+    
+    /**
+     * Prints out a 2D array
+     * @param toPrint array to print
+     */
     public static void print2D(int[][] toPrint) {
         if (toPrint == null) {
             return;
@@ -112,7 +116,6 @@ public class Question_7 {
      * @param args command line argument
      *//*
     public static void main(String[] args) {
-        //1:43pm
         int answer[][];
         int[][] image = {{2, 4, 8, 6, 9}, {9, 4, 2, 7, 9}, {9, 0, 3, 8, 9}, {6, 8, 3, 1, 9}, {3, 1, 6, 9, 8}};
         int[][] image2 = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
