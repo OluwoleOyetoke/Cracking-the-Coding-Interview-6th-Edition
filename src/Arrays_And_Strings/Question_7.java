@@ -60,7 +60,7 @@ public class Question_7 {
      * Rotate matrix without using a new array (in-place rotation). No need to
      * place much emphasis on the 4 bytes mentioned in the question. After all,
      * an int itself is 4 bytes. The main thing required is to be able to rotate
-     * the matrix with 0(1) space
+     * the matrix with 0(1) space.
      *
      * @param image matrix to rotate
      * @param N matrix dimension NxN
