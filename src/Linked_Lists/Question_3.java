@@ -21,8 +21,8 @@ package Linked_Lists;
  * the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
  * that node.
  * <p><b>EXAMPLE</b></p>
- * Input: the node c from the linked list a->b->c->d->e->f
- * Result: nothing is returned, but the new linked list looks like a->b->d->e->f 
+ * Input: the node c from the linked list a-b-c-d-e-f
+ * Result: nothing is returned, but the new linked list looks like a-b-d-e-f 
  * 
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  */
@@ -64,7 +64,7 @@ public class Question_3 {
      * Remove a node from the linked list...uncomment to run
      *
      * @param args Command line argument
-     */
+     *//*
     public static void main(String[] args) {
         MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
         for (int i = 0; i < 8; i++) {
@@ -82,5 +82,5 @@ public class Question_3 {
         System.out.println("NOW ALSO REMOVE NODE IN INDEX 1: ");
         solve2(linkedList.getNode(1)); //get Node in index 1
         System.out.println(linkedList.thisToString());
-    }
+    }*/
 }

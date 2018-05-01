@@ -17,10 +17,6 @@
 package Linked_Lists;
 
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  *Singly linked list implementation
@@ -648,7 +644,6 @@ public class MySinglyLinkedList<Type> implements Comparable {
          * @return true/false returns true if node is empty
          */
         public boolean isEmpty() {
-            LinkedList<Integer> list = new LinkedList();
             if (content == null) {
                 return true;
             } else {
