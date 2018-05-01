@@ -275,6 +275,34 @@ public class MySinglyLinkedList<Type> implements Comparable {
         }
         return null;
     }
+    
+     /**
+     * Returns node in a particular index (if index exists)
+     *
+     * @param index index to search in
+     * @return element content of the node in that index
+     */
+    public Node getNode(int index) {
+        if (head == null) {
+            // System.out.println("List is empty");
+            return null;
+        } else if (index >= size) {
+            // System.out.println("Index out of bound");
+            return null;
+        } else if (index == 0 && head != null) {
+            return head;
+        }
+        Node cursor = head;
+        int count = 0;
+        while (cursor != null) {
+            if (count == index) {
+                return cursor;
+            }
+            cursor = cursor.nextNode;
+            count++;
+        }
+        return null;
+    }
 
     /**
      * Get first element in the linked list
