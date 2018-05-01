@@ -98,7 +98,7 @@ public class Question_1 {
      * Linked list Question_1 main method.....uncomment to run
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         Q1_LinkedList linkedList = new Q1_LinkedList();
         Q1_LinkedList linkedList2 = new Q1_LinkedList();
@@ -125,7 +125,7 @@ public class Question_1 {
         System.out.print("Remove Duplicates (A Runner): ");
         Question_1.solve2(linkedList2);
         linkedList2.printList();
-    }
+    }*/
 
     /**
      * Linked list implementation. Assuming Integer type only
