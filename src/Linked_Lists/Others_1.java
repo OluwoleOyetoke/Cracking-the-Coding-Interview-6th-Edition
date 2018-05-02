@@ -55,7 +55,7 @@ public class Others_1 {
     /**
      * Linked list reversal main method....uncomment to run
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args){
         MySinglyLinkedList list = new MySinglyLinkedList();
         for(int i=0; i<20; i++){
@@ -66,5 +66,5 @@ public class Others_1 {
        if(returnedList!=null){
         System.out.println(returnedList.thisToString());
        }
-    }
+    }*/
 }
