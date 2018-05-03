@@ -472,6 +472,13 @@ public class MySinglyLinkedList<Type> implements Comparable {
      * list
      */
     public int size() {
+        int count=0;
+        Node current = this.head;
+        while(current!=null){
+            count++;
+            current = current.nextNode;
+        }
+        this.size=count;
         return this.size;
     }
 

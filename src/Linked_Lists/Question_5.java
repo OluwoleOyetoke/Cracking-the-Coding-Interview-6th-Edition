@@ -108,7 +108,7 @@ public class Question_5 {
     /**
      *Main method for Linked list question 5....uncomment to run
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         MySinglyLinkedList<Integer> list1 = new MySinglyLinkedList<>();
         list1.add(7);
@@ -124,5 +124,5 @@ public class Question_5 {
         MySinglyLinkedList<Integer> answerList = solve(list1, list2);
         
         System.out.print(answerList.thisToString()+"\n");
-    }
+    }*/
 }
