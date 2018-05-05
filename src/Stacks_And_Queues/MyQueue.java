@@ -17,7 +17,6 @@
 package Stacks_And_Queues;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Queue data structure implementation
