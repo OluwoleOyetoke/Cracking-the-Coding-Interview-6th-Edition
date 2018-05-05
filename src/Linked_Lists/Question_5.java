@@ -79,8 +79,8 @@ public class Question_5 {
     
     /**
      * Reverse the linked list
-     * @param list
-     * @return 
+     * @param list list to reverse
+     * @return linkedList reversed list
      */
     public static MySinglyLinkedList reverse(MySinglyLinkedList list) {
         if (list == null || list.size<2) {

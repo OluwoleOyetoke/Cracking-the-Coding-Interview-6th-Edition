@@ -62,6 +62,7 @@ public class Question_7 {
      *
      * @param list1 linked list 1
      * @param list2 linked list 2
+     * @return intersection node at which intersection happened (if any)
      */
     public static MySinglyLinkedList.Node solve(MySinglyLinkedList list1, MySinglyLinkedList list2) {
         if (list1 == null || list2 == null || list1.size() < 2 || list2.size() < 2) {
@@ -138,6 +139,8 @@ public class Question_7 {
      *
      * @param list1 linked list 1
      * @param list2 linked list 2
+     * @return true/false returns true if intersection exists and false if
+     * otherwise
      */
     public static boolean checkForIntersection(MySinglyLinkedList list1, MySinglyLinkedList list2) {
         if (list1.size() < 2 || list2.size() < 2) {
@@ -167,7 +170,12 @@ public class Question_7 {
      * @return intersection intersecting Node
      */
     public static MySinglyLinkedList.Node solve2(MySinglyLinkedList listA, MySinglyLinkedList listB) {
-        if (listA == null || listB == null || listA.size() < 2 || listB.size() < 2) {
+        if (listA == null || listB == null) {
+            return null;
+        }
+        int listASize = listA.size();
+        int listBSize = listB.size();
+        if (listASize < 2 || listBSize < 2) {
             return null;
         }
         boolean isIntersecting = checkForIntersection(listA, listB);
@@ -175,9 +183,9 @@ public class Question_7 {
             return null;
         }
 
-        int diff = Math.abs(listA.size() - listB.size());
-        int longest = (listA.size() >= listB.size()) ? listA.size() : listB.size();
-        boolean longerA = (listA.size() >= listB.size()) ? true : false;
+        int diff = Math.abs(listASize - listBSize);
+        int longest = (listASize >= listBSize) ? listASize : listBSize;
+        boolean longerA = (listASize >= listBSize) ? true : false;
 
         MySinglyLinkedList.Node currentA = listA.head;
         MySinglyLinkedList.Node currentB = listB.head;
@@ -199,7 +207,59 @@ public class Question_7 {
     }
     
     /**
+     * Just a resolve
+     * @param listA list 1
+     * @param listB list 2
+     * @return intersection node where intersection happened (if any)
+     */
+    public static MySinglyLinkedList.Node resolve(MySinglyLinkedList listA, MySinglyLinkedList listB) {
+        if (listA == null || listB == null) {
+            return null;
+        }
+        int listASize, listBSize;
+        listASize = listA.size();
+        listBSize = listB.size();
+        if (listASize < 2 || listBSize < 2) {
+            return null;
+        }
+        boolean isIntersecting = checkForIntersection(listA, listB);
+        if (isIntersecting == false) {
+            return null;
+        }
+
+        //get length differeces
+        int difference = Math.abs(listASize - listBSize);
+        boolean isALongest = (listASize >= listBSize) ? true : false;
+
+        MySinglyLinkedList.Node itterator;
+        MySinglyLinkedList.Node normal;
+
+        if (isALongest) {
+            itterator = listA.head;
+            normal = listB.head;
+        } else {
+            itterator = listB.head;
+            normal = listA.head;
+        }
+        int counter = 1;
+        while (itterator != null) {
+            if(itterator.equals(normal)){
+                return itterator;
+            }
+            if (counter <= difference) {
+                itterator = itterator.nextNode;
+            } else if (counter > difference) {
+                itterator = itterator.nextNode;
+                normal = normal.nextNode;
+            }
+            counter++;
+        }
+        return null;
+    }
+
+    /**
      * Linked List question_7 main method....uncomment to run
+     *
      * @param args command line arguments
      *//*
     public static void main(String[] args) {
@@ -231,6 +291,7 @@ public class Question_7 {
         System.out.println("List 2 after intersection: " + list2.thisToString());
         //MySinglyLinkedList.Node intersection = solve(list1, list2);
         MySinglyLinkedList.Node intersection = solve2(list1, list2);
+        //MySinglyLinkedList.Node intersection = resolve(list1, list2);
 
         if (intersection != null) {
             System.out.println("Intersecting Node: " + intersection.content);

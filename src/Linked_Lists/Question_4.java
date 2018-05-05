@@ -45,7 +45,8 @@ public class Question_4 {
             if ((int) current.content < partitionElement) {
                 lessThanList.add((Integer) current.content);
             } /*else if ((int) current.content == partitionElement) {
-                MySinglyLinkedList.Node newNode = greaterThanList.new Node((Integer) current.content);
+            //if partition elelment must be immediately after the elements less than it    
+            MySinglyLinkedList.Node newNode = greaterThanList.new Node((Integer) current.content);
                 newNode.nextNode = greaterThanList.head;
                 greaterThanList.head = newNode;
             }  */ else {
@@ -67,7 +68,9 @@ public class Question_4 {
      * @return partitionedList partitioned list
      */
     public static MySinglyLinkedList<Integer> solve2(MySinglyLinkedList<Integer> linkedList, int partitionElement) {
-
+        if (linkedList == null || linkedList.size() < 2) {
+            return linkedList;
+        }
         MySinglyLinkedList.Node current = linkedList.head;
         MySinglyLinkedList.Node itterator = linkedList.head;
         MySinglyLinkedList.Node defaultTail = linkedList.tail;
@@ -110,6 +113,55 @@ public class Question_4 {
         return linkedList;
     }
 
+    public static MySinglyLinkedList<Integer> resolve2(MySinglyLinkedList<Integer> linkedList, int partitionElement) {
+        if (linkedList == null || linkedList.size() < 2) {
+            return linkedList;
+        }
+
+        MySinglyLinkedList.Node current = linkedList.head;
+        MySinglyLinkedList.Node left = linkedList.head;
+        MySinglyLinkedList.Node right = linkedList.tail;
+
+        MySinglyLinkedList.Node firstLeft = linkedList.head;
+        MySinglyLinkedList.Node firstRight = linkedList.head;
+
+        int leftCount = 0;
+        int rightCount = 0;
+        while (current != null) {
+            if ((int) current.content < partitionElement) {
+                if (leftCount == 0) {
+                    left = current;
+                    firstLeft = current;
+                } else {
+                    left.nextNode = current;
+                    left = current;
+                }
+                leftCount++;
+            } else {
+                if (rightCount == 0) {
+                    right = current;
+                    firstRight = current;
+                } else {
+                    right.nextNode = current;
+                    right = current;
+                }
+                rightCount++;
+            }
+            current = current.nextNode;
+        }
+        if (leftCount == 0) {
+            linkedList.head = firstRight;
+            right.nextNode = null;
+            linkedList.tail = right;
+        } else if (rightCount == 0) {
+            linkedList.head = firstLeft;
+            left.nextNode = null;
+            linkedList.tail = left;
+        }
+        left.nextNode = firstRight;
+        return linkedList;
+    }
+
     /**
      * Main method for Linked list question 4....uncomment to run
      *
@@ -130,9 +182,19 @@ public class Question_4 {
 
         System.out.println("AFTER PARTITIONING WITH 3: ");
         MySinglyLinkedList<Integer> returnedList = solve(linkedList, 3);
-        System.out.println(returnedList.thisToString());
+        if (returnedList != null) {
+            System.out.println(returnedList.thisToString());
+        }
         System.out.println("AFTER PARTITIONING WITH 5 (IN PLACE): ");
         MySinglyLinkedList<Integer> returnedList2 = solve2(linkedList, 5);
-        System.out.println(returnedList2.thisToString());
+        if (returnedList2 != null) {
+            System.out.println(returnedList2.thisToString());
+        }
+
+        System.out.println("AFTER PARTITIONING WITH 5 (IN PLACE): ");
+        MySinglyLinkedList<Integer> returnedList3 = resolve2(linkedList, 5);
+        if (returnedList3 != null) {
+            System.out.println(returnedList3.thisToString());
+        }
     }*/
 }
