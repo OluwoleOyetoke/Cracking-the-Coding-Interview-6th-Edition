@@ -25,16 +25,20 @@ package Linked_Lists;
 public class Question_8 {
 
     /**
-     * Method just detects if list is cirular or not by using two runners. It
-     * does not spot where the circularity begins from.
+     * Method just detects if list is cirular or not by using two runners.
+     *
+     * When the runner meet, it returns the pointer of one of the runners to the
+     * head node and then counts step at a time from the head node and the
+     * meeting spot. The point where this runners meet again is the begining of
+     * the circle.
      *
      * @param list list to check
      * @return true/false returns true if list is circular and false if list is
      * not circular
      */
-    public static boolean solve(MySinglyLinkedList list) {
+    public static MySinglyLinkedList.Node solve(MySinglyLinkedList list) {
         if (list == null || list.size < 2) {
-            return false;
+            return null;
         }
         MySinglyLinkedList.Node slower = list.head;
         MySinglyLinkedList.Node faster = list.head;
@@ -44,11 +48,20 @@ public class Question_8 {
             slower = slower.nextNode;
             faster = faster.nextNode.nextNode;
             if (slower.equals(faster)) {
-                return true;
+                slower = list.head;
+                
+                while(slower!=null){
+                    if(slower.equals(faster)){
+                        return slower;
+                    }
+                    slower = slower.nextNode;
+                    faster = faster.nextNode;
+                }
+   
             }
         }
         //to get here means list is not circular
-        return false;
+        return null;
     }
 
     /**
@@ -69,9 +82,15 @@ public class Question_8 {
 
         //make node with content 2 point back to head
         //list1.head.nextNode.nextNode.nextNode.nextNode.nextNode = list1.head;
+        
         //or simply make tail point back to head....this will make the list circular
         list1.tail.nextNode = list1.head;
-
-        System.out.println("Is List circular: " + solve(list1));
+        
+        MySinglyLinkedList.Node solved = solve(list1);
+        if(solved!=null){
+           System.out.println("If list is circular, where: " +solved.content ); 
+        }else{
+            System.out.println("List is not circular");
+        }    
     }*/
 }
