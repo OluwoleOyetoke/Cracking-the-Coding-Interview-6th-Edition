@@ -57,7 +57,6 @@ public class Question_8 {
                     slower = slower.nextNode;
                     faster = faster.nextNode;
                 }
-   
             }
         }
         //to get here means list is not circular
