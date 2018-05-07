@@ -16,8 +16,6 @@
  */
 package Stacks_And_Queues;
 
-import java.util.Stack;
-
 /**
  * Stack data structure implementation
  *
@@ -57,6 +55,7 @@ public class MyStack<Type> {
         top++;
         if (top > size - 1) {
             System.out.println("Stack is full");
+            top--;
             return false;
         }
         stack[top] = element;
@@ -74,7 +73,6 @@ public class MyStack<Type> {
         }
         Type toReturn = stack[top];
         top--;
-        size--;
         return toReturn;
     }
     
