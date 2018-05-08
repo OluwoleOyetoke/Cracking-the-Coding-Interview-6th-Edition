@@ -23,9 +23,10 @@ package Stacks_And_Queues;
  */
 public class MyStack<Type> {
 
-    int top;
-    int size;
-    Type[] stack;
+    private int top;
+    private int size;
+    private Type[] stack;
+    private Type currentMin;
     
     /**
      * Default constructor
@@ -64,7 +65,7 @@ public class MyStack<Type> {
     
     /**
      * Pop out element from the stack
-     * @return toReturn element popedd out (if any)
+     * @return toReturn element poped out (if any)
      */
     Type pop() {
         if (top < 0) {
