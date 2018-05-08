@@ -75,14 +75,16 @@ public class SetOfStacks {
         } else {
             if (currentBucketIndex + 1 < currentAvailabeBuckets) {
                 currentBucketIndex++;
+                System.out.println("Bucket " + currentBucketIndex + " was full. A previously creaed bucket was reused");
             } else {
                 currentBucketIndex++;
                 currentAvailabeBuckets++;
                 Stack<Integer> newStack = new Stack<>();
                 setOfStacks.add(newStack);
+                System.out.println("Bucket " + currentBucketIndex + " full. New bucket created");
             }
             setOfStacks.get(currentBucketIndex).add(element);
-            System.out.println("Bucket " + currentBucketIndex + " was full. New bucket created");
+            
         }
         return true;
     }
@@ -113,7 +115,9 @@ public class SetOfStacks {
     }
 
     /**
-     * Pops stack at a particular index of the set
+     * Pops stack at a particular index of the set. No need to roll over/try to
+     * balance all buckets once again, from ground-up, except stipulated that
+     * only final top bucket can be in an un-full state.
      *
      * @param bucketIndex bucket with stack to pop
      * @return poped poped value
@@ -131,6 +135,59 @@ public class SetOfStacks {
                 return (int) setOfStacks.get(bucketIndex).pop();
             }
         }
+    }
+
+    public static int popAtAnRollOver(int bucketIndex) {
+        if (bucketIndex > currentBucketIndex) {
+            System.out.println("Bucket Index out of bound");
+            return -1;
+        } else {
+            Stack currentBucket = setOfStacks.get(bucketIndex);
+            if (currentBucket.isEmpty()) {
+                System.out.println("Stack is Empty");
+                return -1;
+            } else {
+                int toReturn = (int) setOfStacks.get(bucketIndex).pop();
+                rebalanceSets();
+                return toReturn;
+            }
+        }
+    }
+
+    //5:20am
+    public static boolean rebalanceSets() {
+        int balanceDiff = 0;
+        int currentStackSize = 0;
+        int nextStackSize = 0;
+        
+        Stack tempStack;
+        Stack currentStack;
+        Stack nextStack;
+        
+        for (int i = 0; i < currentBucketIndex; i++) {
+            tempStack = new Stack();
+            currentStack = setOfStacks.get(i);
+            nextStack = setOfStacks.get(i + 1);
+            currentStackSize = currentStack.size();
+            nextStackSize = nextStack.size();
+
+            if (currentStackSize < maxStackSize) {
+                //pop all of next stack into tempStack
+                for (int j = 0; j < nextStackSize; j++) {
+                    tempStack.add(nextStack.pop());
+                }
+                balanceDiff = maxStackSize - currentStackSize;
+                for (int k = 0; k < nextStackSize; k++) {
+                    if(k<balanceDiff){
+                    currentStack.push(tempStack.pop()); //push number of element difference from temp stack on top of lower stack
+                    }else{
+                        nextStack.push(tempStack.pop()); //push the remaining element back on next stack
+                    }
+                }
+            } 
+        }
+        System.out.println("Rebalanceing Done");
+        return true;
     }
 
     public static boolean isBucketEmpty(Stack bucket) {
@@ -174,6 +231,16 @@ public class SetOfStacks {
         System.out.println("Currently on Set: " + sos.currentBucketIndex);
          for (int i = 0; i < 38; i++) {
             System.out.println("POP: " + sos.pop());
+        }
+         
+         System.out.println("\nTESTING POP AT WITH ROLL OVER");
+          SetOfStacks sos2 = new SetOfStacks(5);
+        for (int i = 0; i < 20; i++) {
+            sos2.push(i);
+        }
+        sos2.popAtAnRollOver(0);
+        for(int i=0; i<20; i++){
+            System.out.println("POP: " + sos2.pop());
         }
     }*/
 }
