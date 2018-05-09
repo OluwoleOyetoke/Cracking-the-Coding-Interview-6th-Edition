@@ -253,10 +253,9 @@ public class Question_6b {
      *
      * @param args command line arguments
      * @throws InterruptedException due to the Thread.sleeps added
-     */
+     *//*
     public static void main(String[] args) throws InterruptedException {
         Question_6b q = new Question_6b();
         q.solve();
-
-    }
+    }*/
 }
