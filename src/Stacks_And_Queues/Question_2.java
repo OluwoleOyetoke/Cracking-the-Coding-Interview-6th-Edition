@@ -66,7 +66,7 @@ public class Question_2 {
     /**
      * Retrieve current minimum in stack
      *
-     * @return
+     * @return min the minimum value in the stack
      */
     public static int min() {
         if (minStack.isEmpty()) {

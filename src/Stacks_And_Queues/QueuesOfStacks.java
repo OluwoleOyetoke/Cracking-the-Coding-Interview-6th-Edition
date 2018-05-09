@@ -60,7 +60,7 @@ public class QueuesOfStacks {
     
     /**
      * Used to check the door of the queue
-     * @return 
+     * @return peeked the value on top of the stack
      */
     public int peek(){
     //move bottom of stack to top of queue
