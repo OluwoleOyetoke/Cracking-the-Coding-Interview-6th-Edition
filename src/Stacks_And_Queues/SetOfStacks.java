@@ -84,7 +84,7 @@ public class SetOfStacks {
                 System.out.println("Bucket " + currentBucketIndex + " full. New bucket created");
             }
             setOfStacks.get(currentBucketIndex).add(element);
-            
+
         }
         return true;
     }
@@ -159,11 +159,11 @@ public class SetOfStacks {
         int balanceDiff = 0;
         int currentStackSize = 0;
         int nextStackSize = 0;
-        
+
         Stack tempStack;
         Stack currentStack;
         Stack nextStack;
-        
+
         for (int i = 0; i < currentBucketIndex; i++) {
             tempStack = new Stack();
             currentStack = setOfStacks.get(i);
@@ -178,13 +178,16 @@ public class SetOfStacks {
                 }
                 balanceDiff = maxStackSize - currentStackSize;
                 for (int k = 0; k < nextStackSize; k++) {
-                    if(k<balanceDiff){
-                    currentStack.push(tempStack.pop()); //push number of element difference from temp stack on top of lower stack
-                    }else{
+                    if (k < balanceDiff) {
+                        currentStack.push(tempStack.pop()); //push number of element difference from temp stack on top of lower stack
+                        if (tempStack.isEmpty()) {
+                            currentBucketIndex--;
+                        }
+                    } else {
                         nextStack.push(tempStack.pop()); //push the remaining element back on next stack
                     }
                 }
-            } 
+            }
         }
         System.out.println("Rebalanceing Done");
         return true;

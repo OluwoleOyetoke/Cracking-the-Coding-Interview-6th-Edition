@@ -218,7 +218,10 @@ public class Question_6b {
     }
 
     class Dogs extends Animal {
-
+        
+        String name;
+        Timestamp timeIn;
+        
         Dogs(Timestamp timeIn, String name) {
             super(timeIn,name);
             this.timeIn = timeIn;
@@ -244,8 +247,7 @@ public class Question_6b {
         public void setTimeIn(Timestamp timeIn) {
             this.timeIn = timeIn;
         }
-        String name;
-        Timestamp timeIn;
+     
     }
 
     /**
