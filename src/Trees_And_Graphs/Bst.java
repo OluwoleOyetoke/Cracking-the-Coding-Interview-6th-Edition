@@ -17,17 +17,27 @@
 package Trees_And_Graphs;
 
 /**
- *
- * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ *<b>My Bst implementation 2</b>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  */
 public class Bst {
 
     Node root;
-
+    
+    /**
+     * Default constructor
+     * @param value value to be added as root
+     */
     Bst(int value) {
         this.root = new Node(value);
     }
-
+    
+    
+    /**
+     * Used to add nodes into the BST
+     * @param value value to be added to BST
+     * @return true/false true if value was successfully added
+     */
     public boolean add(int value) {
         if (root == null) {
             root.value = value;
@@ -64,7 +74,14 @@ public class Bst {
         }
         return false;
     }
-
+    
+    /**
+     * Delete node from BST
+     * @param root node to begin search from
+     * @param value value to add the the BST
+     * @return valueAdded value added (if successfully added)
+     * @throws TreeException Tree exception
+     */
     public int delete(Node root, int value) throws TreeException {
         if (this.root == null) {
             throw new TreeException("Bst is empty");
@@ -153,7 +170,13 @@ public class Bst {
         //Would never get here. if for any reason, here is reached
         throw new TreeException("Node to delete does not exist");
     }
-
+    
+    /**
+     * Search through BST for a particular value
+     * @param value value to search for
+     * @return valueFound valueFound (if found)
+     * @throws TreeException Tree Exception
+     */
     public int search(int value) throws TreeException {
         if (root == null) {
             throw new TreeException("Tree is empty");
@@ -188,7 +211,11 @@ public class Bst {
 
         return 0; //will never get here
     }
-
+    
+    /**
+     * In order traversal of BSt
+     * @param root root to start traversal from
+     */
     public void inOrderTraversal(Node root) {
         if (root == null) {
             return;
@@ -200,6 +227,10 @@ public class Bst {
 
     }
 
+    /**
+     * Pre order traversal of BST
+     * @param root root to start traversal from
+     */
     public void preOrderTraversal(Node root) {
         if (root == null) {
             return;
@@ -210,7 +241,10 @@ public class Bst {
         preOrderTraversal(root.right);
 
     }
-
+    /**
+     * Post order traversal of the BST
+     * @param root root to start traversal from
+     */
     public void postOrderTraversal(Node root) {
         if (root == null) {
             return;
@@ -220,13 +254,18 @@ public class Bst {
         postOrderTraversal(root.right);
         System.out.print(root.value + " ,");
     }
-
+    
+    /**
+     * Make decision on moving leftwards or rightwards during BST node insertion
+     * @param current current Node
+     * @param incoming node to be added
+     * @return diff
+     */
     private int decision(Node current, Node incoming) {
         if (current == null) {
             System.out.println("Current Node is null");
             return -2;
         }
-
         if (current.compareTo(incoming) < 0) {
             return 1;
         } else if (current.compareTo(incoming) == 0) {
@@ -234,9 +273,14 @@ public class Bst {
         } else {
             return -1;
         }
-
     }
-
+    
+    /**
+     * Checks if node is a leaf node
+     * @param node to to check
+     * @return true/false true if node is a leaf
+     * @throws TreeException Tree Exception
+     */
     public boolean isLeaf(Node node) throws TreeException {
         if (node == null) {
             throw new TreeException("Null node passed to isLeaf");
@@ -248,6 +292,11 @@ public class Bst {
         }
     }
     
+    /**
+     * Checks if current node is in ancestor's left or right
+     * @param node node to check position
+     * @return val -1 if at the left of ancestor and +1 if at the right of ancestor
+     */
     public int myPositionWithAncestor(Node node){
            //check if it is present on the left or right of its ancestor
                     if(node.ancestor.left!=null && node.ancestor.left.value== node.value){//on the left of ancestor
@@ -260,6 +309,13 @@ public class Bst {
                     }
     }
     
+    /**
+     * Find minimum in BST
+     * @param root root to start minimum search from
+     * @param minimum initial minimum
+     * @return minVal min value found
+     * @throws TreeException Tree Exception
+     */
     public int findMinimum(Node root, int minimum) throws TreeException{
          if (root == null) {
             return minimum;
@@ -273,7 +329,10 @@ public class Bst {
             }
             return minimum;
     }
-
+    
+    /**
+     * Node class
+     */
     class Node implements Comparable {
 
         int value;

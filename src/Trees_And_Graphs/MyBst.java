@@ -20,7 +20,7 @@ package Trees_And_Graphs;
  * <b>BST Implementation:</b> Add, Delete, Search and Traverse (pre-order, in
  * order and post order)
  *
- * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
  * @param <Type> type
  */
 public class MyBst<Type> {
