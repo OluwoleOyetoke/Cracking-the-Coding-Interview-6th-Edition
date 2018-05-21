@@ -55,7 +55,11 @@ public class MyBst<Type> {
         while (current != null) {
 
             int decision = decide(current, toAdd);
-            if (decision <= 0 && current.left == null) {
+            if(decision==0){
+                System.out.println("Duplicates not allowed");
+                return false;
+            }
+            else if (decision <= 0 && current.left == null) {
                 System.out.println("Add " + toAdd.value + " to left of " + current.value);
                 current.left = toAdd;
                 current.left.anscestor = current;

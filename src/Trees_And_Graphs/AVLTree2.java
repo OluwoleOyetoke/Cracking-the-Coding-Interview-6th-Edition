@@ -17,10 +17,9 @@
 package Trees_And_Graphs;
 
 /**
- *
+ *<b>AVL tree implementation</b> from Geek for Geeks
  * @author Mayank Jaiswal <https://www.geeksforgeeks.org/avl-tree-set-1-insertion/>
  */
-// Java program for insertion in AVL Tree
 class Node {
     int key, height;
     Node left, right;

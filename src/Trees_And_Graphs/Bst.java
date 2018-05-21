@@ -51,8 +51,11 @@ public class Bst {
 
             //make a decision to add to left or to traverse to next left node 
             dec = decision(current, toAdd);
-
-            if (dec < 0) { //leftwards  
+            if(dec==0){
+                System.out.println("Duplicates not allowed");
+                return false;
+            }
+            else if (dec < 0) { //leftwards  
                 if (current.left == null) { //left is empty
                     current.left = toAdd;
                     toAdd.ancestor = current;

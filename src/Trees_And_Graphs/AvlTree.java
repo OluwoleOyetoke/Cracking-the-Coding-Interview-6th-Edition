@@ -17,7 +17,8 @@
 package Trees_And_Graphs;
 
 /**
- * <b>Avl tree implementation</b>
+ * <b>Avl tree implementation</b>...Insertion and Traversal Only.
+ * Crude, long and not the best implementation possible
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
@@ -53,7 +54,11 @@ public class AvlTree {
         while (current != null) {
 
             dec = decision(current.value, value);
-            if (dec < 0) {//move rightwards
+            if(dec==0){
+                System.out.println("Duplicates not allowed");
+                return false;
+            }
+            else if (dec < 0) {//move rightwards
                 if (current.right == null) {
                     System.out.println("Add " + value + " to right of " + current.value);
                     current.right = toAdd;
@@ -84,7 +89,13 @@ public class AvlTree {
             checkAndBalance(toAdd);
         return true;
     }
-
+    
+    /**
+     * Make decision whether to go left or right
+     * @param current current node value
+     * @param toAdd incoming node value
+     * @return decision left or right
+     */
     public int decision(int current, int toAdd) {
         return current - toAdd;
     }
@@ -471,7 +482,7 @@ public class AvlTree {
      *
      * @param args command line arguments
      * @throws TreeException Tree Exception
-     */
+     *//*
     public static void main(String[] args) throws TreeException {
         //LOAD AVL TREE BST
         AvlTree avl = new AvlTree(7);
@@ -488,5 +499,5 @@ public class AvlTree {
         System.out.println("\nAVL Root: " + avl.root.value+", Balance factor: "+avl.root.balanceFactor);
         System.out.println("AVL Root Left: " + avl.root.left.value);
         System.out.println("AVL Root Right: " + avl.root.right.value);
-    }  
+    }  */
 }
