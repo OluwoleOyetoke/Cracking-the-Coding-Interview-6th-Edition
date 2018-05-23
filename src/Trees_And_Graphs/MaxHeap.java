@@ -19,6 +19,8 @@ package Trees_And_Graphs;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+
 /**
  * </b> Max Heap </b> implementation
  *
@@ -30,12 +32,21 @@ public class MaxHeap {
     HeapNode root;
     HeapNode found;
     int noOfElelemts;
-
+    
+    /**
+     * Default constructor
+     * @param value value to be added as root
+     */
     MaxHeap(int value) {
         root = new HeapNode(value);
         noOfElelemts = 1;
     }
-
+    
+    /**
+     * Insert new node into heap
+     * @param value value to be added
+     * @return true/false true if operation was successful and false if otherwise
+     */
     public boolean insert(int value) {
         if (root == null) {
             root.value = value;
@@ -46,7 +57,6 @@ public class MaxHeap {
         int n = noOfElelemts + 1;
         double inBase2 = Math.log(n)/Math.log(2);
         int height = (int) Math.floor(inBase2);
-        int x = height-1;
         ArrayList<HeapNode> preLastNodes = new ArrayList<>();
         getPreLastRow(root, (height-1), preLastNodes);
         Iterator<HeapNode> it = preLastNodes.iterator();
@@ -68,7 +78,72 @@ public class MaxHeap {
         noOfElelemts++;
         return true;
     }
+        
+        /**
+         * Delete element from heap
+         * @param root node to start deletion search from
+         * @param value value to add
+         * @return true/false true if operation was successful and false if otherwise
+         */
+        public boolean delete(HeapNode root, int value) {
+        if(root==null){
+            return false;
+        }
+        ArrayList<HeapNode> preLastNodes = new ArrayList<>();
+        
+        //get last element in heap
+        int n = noOfElelemts;
+        double inBase2 = Math.log(n)/Math.log(2);
+        int height = (int) Math.floor(inBase2);
+        getPreLastRow(root, height - 1, preLastNodes);
+        Iterator<HeapNode> it = preLastNodes.iterator();
+        HeapNode check;
+        HeapNode last=null;
+        while (it.hasNext()) {
+            check = it.next();
+            if (check.left != null) {
+                last = check.left;
+            }
+            if (check.right != null) {
+                last = check.right;
+            }
+        }
+        if(last==null){
+            System.out.println("Error, last element is null");
+            return false;
+        }
 
+        //find and replace
+        found=null;
+        getNode(root,value);
+        if(found!=null){
+            found.value= last.value;
+            if(last.ancestor!=null && last.ancestor.left!=null && last.ancestor.left.value==last.value){
+                last.ancestor.left=null; //remove last elemet
+            }else if(last.ancestor!=null && last.ancestor.right!=null && last.ancestor.right.value==last.value){
+                last.ancestor.right=null; //remove last element
+            }
+        }else{
+            System.out.println("No Such node "+value+" in heap");
+            return false;
+        }
+        
+        //decide if to heapify down or up
+        if(found.ancestor!=null && found.value>found.ancestor.value){
+            heapifyUp(found);
+        }else if(found.left!=null && found.value<found.left.value){
+            heapifyDown(found);
+        }else if(found.right!=null && found.value<found.right.value){
+            heapifyDown(found);
+        }
+        noOfElelemts--;
+        return true;
+    }
+        
+    /**
+     * Check to make sure current node is lesser than all its sub-nodes
+     * @param root node to start heapify check from
+     */
     public void heapifyUp(HeapNode root) {
         if (root == null) {
             System.out.println("Null node epast to heapify");
@@ -97,7 +172,11 @@ public class MaxHeap {
             }
         }
     }
-
+    
+    /**
+     * Check to make sure current node is greater than all its sub-nodes
+     * @param root node to start heapify check from
+     */
     public void heapifyDown(HeapNode root) {
         if (root == null) {
             return;
@@ -130,22 +209,35 @@ public class MaxHeap {
             }
         }
     }
-
+    
+    /**
+     * Swap current node with its left element
+     * @param current current node
+     */
     public void swapLeft(HeapNode current) {
         current.value = current.value + current.left.value;
         current.left.value = current.value - current.left.value;
         current.value = current.value - current.left.value;
-
     }
-
+    
+     /**
+     * Swap current node with its right element
+     * @param current current node
+     */
     public void swapRight(HeapNode current) {
         current.value = current.value + current.right.value;
         current.right.value = current.value - current.right.value;
         current.value = current.value - current.right.value;
     }
-
+    
+    /**
+     * Get row of nodes next to the last node
+     * @param root node to start search from
+     * @param level level where the nodes to retrieve are in
+     * @param storage store retrieved nodes here
+     */
     public void getPreLastRow(HeapNode root, int level, ArrayList<HeapNode> storage) {
-        if (root == null) {
+        if (root == null || level<0) {
             return;
         }
 
@@ -155,82 +247,39 @@ public class MaxHeap {
             getPreLastRow(root.left, level - 1, storage);
             getPreLastRow(root.right, level - 1, storage);
         }
-
     }
 
-    public boolean delete(HeapNode root, int value) {
-        if(root==null){
-            return false;
-        }
-        ArrayList<HeapNode> preLastNodes = new ArrayList<>();
-        
-        //get last element in heap
-        int n = noOfElelemts + 1;
-        double inBase2 = Math.log(n)/Math.log(2);
-        int height = (int) Math.floor(inBase2);
-        getPreLastRow(root, height - 1, preLastNodes);
-        Iterator<HeapNode> it = preLastNodes.iterator();
-        HeapNode check;
-        HeapNode last=null;
-        while (it.hasNext()) {
-            check = it.next();
-            if (check.left != null) {
-                last = check.left;
-            }
-            if (check.right != null) {
-                last = check.right;
-            }
-        }
-        if(last==null){
-            System.out.println("Error, last element is null");
-            return false;
-        }
-
-        //find and replace
-    found=null;
-        getNode(root,value);
-        if(found!=null){
-            found.value= last.value;
-            if(last.ancestor!=null && last.ancestor.left!=null && last.ancestor.left.value==last.value){
-                last.ancestor.left=null; //remove last elemet
-            }else if(last.ancestor!=null && last.ancestor.right!=null && last.ancestor.right.value==last.value){
-                last.ancestor.right=null; //remove last element
-            }
-        }else{
-            System.out.println("No Such node "+value+" in heap");
-            return false;
-        }
-        
-        //decide if to heapify down or up
-        if(found.ancestor!=null && found.value>found.ancestor.value){
-            heapifyUp(found);
-        }else if(found.left!=null && found.value<found.left.value){
-            heapifyDown(found);
-        }else if(found.right!=null && found.value<found.right.value){
-            heapifyDown(found);
-        }
-        noOfElelemts--;
-        return true;
-    }
-
+    /**
+     * Get current max element. This should be at the root of the heap
+     * @return 
+     */
     public int getMax() {
         return root.value;
     }
 
+    /**
+     * Find and get a specific node in the tree (if it exists)
+     * @param root node to start search from
+     * @param toFind value to find
+     */
     public void getNode(HeapNode root,int toFind) {
         if (root == null) {
             return;
         }
 
         if (root.value == toFind) {
-            System.out.println("Found...........");
             found = root;
         } else {
             getNode(root.left, toFind);
             getNode(root.right,toFind);
         }
     }
-
+    
+    /**
+     * Print out heap using level order traversal
+     * @param root node to start search from
+     * @param level level to print
+     */
     public void levelOrderTraversal(HeapNode root, int level) {
         if (root == null) {
             return;
@@ -241,6 +290,14 @@ public class MaxHeap {
         } else {
             levelOrderTraversal(root.left, level - 1);
             levelOrderTraversal(root.right, level - 1);
+        }
+    }
+    
+   public void printHeap(int level){
+        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
+        for (int i = 0; i <= level; i++) {
+           levelOrderTraversal(root, i);
+            System.out.println("\n");
         }
     }
 
@@ -264,51 +321,40 @@ public class MaxHeap {
         System.out.println("After adding: 11, Max= " + maxHeap.getMax());
         maxHeap.insert(1);
         System.out.println("After adding: 1, Max= " + maxHeap.getMax());
-
-        //TRAVERSE HEAP - LEVEL ORDER
-        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
-        for (int i = 0; i < 5; i++) {
-            maxHeap.levelOrderTraversal(maxHeap.root, i);
-            System.out.println("\n");
-        }
-
-        System.out.println("Delete 1: ");
+        
+        int level = (int) Math.floor(Math.log(maxHeap.noOfElelemts)/ Math.log(2));
+        maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
+        
+      
+        System.out.println("Delete 1, 4, 7 and 6: ");
         maxHeap.delete(maxHeap.root, 1);
-        System.out.println("Delete 4: ");
         maxHeap.delete(maxHeap.root, 4);
-        System.out.println("Delete 7: ");
         maxHeap.delete(maxHeap.root, 7);
-        System.out.println("Delete 6: ");
         maxHeap.delete(maxHeap.root, 6);
 
-        //TRAVERSE HEAP - LEVEL ORDER
-        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
-        for (int i = 0; i < 5; i++) {
-            maxHeap.levelOrderTraversal(maxHeap.root, i);
-            System.out.println("\n");
-        }
+        level = (int) Math.floor(Math.log(maxHeap.noOfElelemts)/ Math.log(2));
+        maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
+        
 
-        System.out.println("Delete 12: ");
+        System.out.println("Delete 12, 10 and 4: ");
         maxHeap.delete(maxHeap.root, 12);
-        System.out.println("Delete 10: ");
         maxHeap.delete(maxHeap.root, 10);
-        System.out.println("Delete 4: ");
         maxHeap.delete(maxHeap.root, 4);
-        //TRAVERSE HEAP - LEVEL ORDER
-        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
-        for (int i = 0; i < 5; i++) {
-            maxHeap.levelOrderTraversal(maxHeap.root, i);
-            System.out.println("\n");
-        }
+        
+        level = (int) Math.floor(Math.log(maxHeap.noOfElelemts)/ Math.log(2));
+        maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
 
         System.out.println("Delete 0: ");
         maxHeap.delete(maxHeap.root, 0);
-        //TRAVERSE HEAP - LEVEL ORDER
-        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
-        for (int i = 0; i < 5; i++) {
-            maxHeap.levelOrderTraversal(maxHeap.root, i);
-            System.out.println("\n");
-        }
+        
+        level = (int) Math.floor(Math.log(maxHeap.noOfElelemts)/ Math.log(2));
+        maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
+        
+        System.out.println("Delete 14: ");
+        maxHeap.delete(maxHeap.root, 14);
+        
+        level = (int) Math.floor(Math.log(maxHeap.noOfElelemts)/ Math.log(2));
+        maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
 
     }
 
