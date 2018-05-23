@@ -312,7 +312,7 @@ public class MinHeap {
      * @throws TreeException Tree Exception
      *//*
     public static void main(String[] args) throws TreeException {
-        //LOAD AND LOAD BST
+        //LOAD HEAP
         MinHeap minHeap = new MinHeap(7);
         System.out.println("After adding Root: 7, Min= " + minHeap.getMin());
         for (int i = 0; i < 8; i++) {
