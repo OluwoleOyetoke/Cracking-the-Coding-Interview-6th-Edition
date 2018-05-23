@@ -265,7 +265,7 @@ public class MinHeap {
      * Get min value in heap
      *
      * @return min min value in heap
-     * @throws TreeException
+     * @throws TreeException Tree exception
      */
     public int getMin() throws TreeException {
         if (root == null) {
@@ -289,8 +289,8 @@ public class MinHeap {
 
     /**
      * Level order traversal of Heap
-     *
-     * @param root root to start traversal from
+     *@param root node to start traversal search from
+     * @param level level to print
      */
     public void levelOrderTraversal(HeapNode root, int level) {
         if (root == null) {

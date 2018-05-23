@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 
 /**
- * </b> Max Heap </b> implementation
+ * <b> Max Heap </b> implementation
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
@@ -251,7 +251,7 @@ public class MaxHeap {
 
     /**
      * Get current max element. This should be at the root of the heap
-     * @return 
+     * @return val max value in heap
      */
     public int getMax() {
         return root.value;
@@ -305,7 +305,7 @@ public class MaxHeap {
      * Max Heap main/test method.....uncomment to run
      *
      * @param args Command line arguments
-     */
+     *//*
     public static void main(String[] args) {
            //LOAD HEAP
         MaxHeap maxHeap = new MaxHeap(7);
@@ -357,6 +357,6 @@ public class MaxHeap {
         maxHeap.printHeap(level); //TRAVERSE HEAP - LEVEL ORDER
 
     }
-
+*/
     
 }
