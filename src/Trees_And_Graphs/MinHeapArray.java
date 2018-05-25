@@ -238,7 +238,7 @@ public class MinHeapArray {
      * MinHeap Array main/test method...uncomment to run
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         MinHeapArray minHA = new MinHeapArray(50);
         for (int i = 20; i > 3; i--) {
@@ -256,5 +256,5 @@ public class MinHeapArray {
         System.out.println("Delete 4");
         minHA.delete(4);
         minHA.levelOrderTraversal();
-    }
+    }*/
 }
