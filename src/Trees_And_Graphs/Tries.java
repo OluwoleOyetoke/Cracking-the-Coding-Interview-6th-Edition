@@ -20,8 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * <b>Tries Data Structure Implementation</b>
- *
+ * <b>Tries Data Structure Implementation</b>: AddWords, Print All Words, Find Suffixes
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
@@ -43,12 +42,12 @@ public class Tries {
 
         char content;
         HashMap<Character, Node> children;
-
-        ;
+        boolean isCompleteWord;
 
         Node(char content) {
             this.content = content;
             children = new HashMap<>();
+            isCompleteWord = false;
         }
     }
 
@@ -61,6 +60,9 @@ public class Tries {
     public boolean addWords(String word) {
         if (root == null) {
             root = new Node('-');
+        }if(word==null || word.isEmpty()){
+            System.out.println("Empty word sent");
+            return false;
         }
 
         char[] wordArray = word.toCharArray();
@@ -68,7 +70,7 @@ public class Tries {
         Node checked = root;
         for (int i = 0; i < wordArray.length; i++) {
 
-            if (current.children != null) {
+            if (current.children != null && current.children.size()!=0) {
                 checked = current.children.get(wordArray[i]);
                 if (checked != null) {
                     current = checked;
@@ -86,10 +88,11 @@ public class Tries {
             }
 
             if (i == (wordArray.length - 1)) {
-                //add word ending character here
-                Node newNode = new Node('*');
-                current.children.put(wordArray[i], newNode);
-                break;
+                current.isCompleteWord = true;
+                if (current.children == null || current.children.size()==0) {
+                    Node newNode = new Node('*');
+                    current.children.put(wordArray[i], newNode);  //add word ending character here
+                }
             }
         }
         return true;
@@ -101,6 +104,10 @@ public class Tries {
      * @param word word whose suffix is to be found
      */
     public void suffixOf(String word) {
+        if(word==null || word.isEmpty()){
+            System.out.println("Empty word sent");
+            return;
+        }
         char[] wordArray = word.toCharArray();
 
         Node current = root;
@@ -130,35 +137,48 @@ public class Tries {
      * @param prefix prefixes to concatenate as the suffix
      */
     public void suffixes(Node current, String prefix) {
-        Iterator<Node> it = null;
-        if (current.content == '*') {
-            System.out.println(prefix);
+        if (current == null || current.content == '*' || current.children == null) {
             return;
         }
+        if (current.isCompleteWord == true) {
+            System.out.println("Suffix: " + prefix);
+        }
 
+        Iterator<Node> it = null;
         it = current.children.values().iterator();
         Node check = null;
         while (it.hasNext()) {
             check = it.next();
             if (check.content != '*') {
-                prefix = prefix + "" + check.content;
+                suffixes(check, prefix + "" + check.content);
+            } else {
+                suffixes(check, prefix);
             }
-            suffixes(check, prefix);
         }
+    }
+
+    public void printTries() {
+        if (root == null || root.children == null) {
+            System.out.println("Tree is empty");
+        }
+        System.out.println("Tree as is: ");
+        suffixes(root, "");
     }
 
     /**
      * Tries main/test method....uncomment to run
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
-
         Tries tries = new Tries();
-        String[] wordArray = {"Hello", "How", "Are", "You", "Doing", "Today", "Andrew", "Andreel"};
+        String[] wordArray = {"Hello", "How", "Are", "You", "Doing", "Today", "Andrew", "Andreel", "And", "Please", "Do", "Good", "Today"};
         for (int i = 0; i < wordArray.length; i++) {
             tries.addWords(wordArray[i].toLowerCase());
         }
-        tries.suffixOf("Andr".toLowerCase());
-    }
+
+        tries.printTries();
+        System.out.println("\nGet Suffixes of An");
+        tries.suffixOf("An".toLowerCase());
+    }*/
 }
