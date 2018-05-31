@@ -17,7 +17,10 @@
 package Trees_And_Graphs;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -31,7 +34,7 @@ import java.util.Stack;
  */
 public class Graph<T> {
 
-    HashMap<String, Vertice> graphPlain;
+    Hashtable<String, Vertice> graphPlain;
 
     /**
      * Graph default constructor
@@ -39,46 +42,88 @@ public class Graph<T> {
      * @param begining
      */
     Graph() {
-        graphPlain = new HashMap<>();
+        graphPlain = new Hashtable<>();
     }
-
+    
+    /**
+     * Add vertices to graph
+     * @param name name of vertice
+     * @param content content of vertice
+     * @return true/false true of successful and false if otherwise
+     */
     public boolean addVertice(String name, T content) {
         Vertice vertice = new Vertice(name, content);
         graphPlain.put(name, vertice);
         return true;
     }
-
+    
+    /**
+     * Remove vertice from graph
+     * @param vertice vertice
+     * @return true/false true of successful and false if otherwise
+     */
     public boolean removeVertice(Vertice vertice) {
         graphPlain.remove(vertice.name);
+        Iterator<Edge> it = vertice.edges.iterator();
+            while (it.hasNext()) {
+                it.next().destination.froms.remove(vertice);
+            }
         return true;
     }
-
+    
+    /**
+     * Create a vertice
+     * @param name name of vertice
+     * @param content content of vertice
+     * @return cretedVertice created vertice
+     */
     public Vertice createVertice(String name, T content) {
         Vertice vertice = new Vertice(name, content);
         return vertice;
     }
-
+    
+    /**
+     * Make graph edge
+     * @param a vertice a
+     * @param b vertice b
+     * @param weight weight of edge
+     * @param direction direction of edge
+     */
     public void makeEdge(Vertice a, Vertice b, int weight, int direction) {
         Edge newEdge;
 
         if (direction == 0) { //into b
             newEdge = new Edge(a, b, weight);
+            newEdge.weight = weight;
             a.edges.add(newEdge);
             b.edges.add(newEdge);
+            b.froms.add(a);
         } else if (direction == 1) {//into a
             newEdge = new Edge(b, a, weight);
+            newEdge.weight = weight;
             a.edges.add(newEdge);
             b.edges.add(newEdge);
+            a.froms.add(b);
         } else {//both ways
             Edge dir1 = new Edge(a, b, weight);
+            dir1.weight = weight;
             Edge dir2 = new Edge(b, a, weight);
+            dir2.weight = weight;
             a.edges.add(dir1);
             b.edges.add(dir1);
             a.edges.add(dir2);
             b.edges.add(dir2);
+            a.froms.add(b);
+            b.froms.add(a);
         }
     }
-
+    
+    /**
+     * Depth first search of graph
+     * @param start start node
+     * @param stop stop node
+     * @param prefix prefix
+     */
     public void depthFirstSearch(Vertice start, Vertice stop, String prefix) {
         if (start == null || stop == null) {
             System.out.println("One of the requester vertices is not in the graph");
@@ -104,7 +149,15 @@ public class Graph<T> {
             }
         }
     }
-
+    
+    /**
+     * Breadth first search through a graph
+     * @param start start vertice
+     * @param stop stop vertice
+     * @param prefix prefix queue
+     * @param queue vertice queue
+     * @param prefString prefix string
+     */
     public void breadthFirstSearch(Vertice start, Vertice stop, Queue<String> prefix, Queue<Vertice> queue, String prefString) {
         if (start == null || stop == null) {
             System.out.println("One of the requester vertices is not in the graph");
@@ -112,7 +165,7 @@ public class Graph<T> {
         }
 
         Vertice current = start;
-        String currentPrefix; 
+        String currentPrefix;
         current.visited = true;
         Iterator<Edge> it = current.edges.iterator();
         Edge edge;
@@ -130,13 +183,117 @@ public class Graph<T> {
                     prefix.add(prefString);
                 }
             }
-            
+
         }
-        while(queue.size()!=0){
+        while (queue.size() != 0) {
             Vertice next = queue.poll();
             String pre = prefix.poll();
-            prefString = pre+", "+next.name;
+            prefString = pre + ", " + next.name;
             breadthFirstSearch(next, stop, prefix, queue, prefString);
+        }
+
+    }
+    
+    /**
+     * Find shortest path between two vertices
+     * @param start start vertice
+     * @param end end vertice
+     */
+    public void dijkstra2(Vertice start, Vertice end) {
+        if (start == null || start.visited == true) {
+            System.out.println("Visited");
+            return;
+        }
+
+        if (start != null && start == end) {
+            ArrayList list = new ArrayList();
+            list.add(start.name);
+            Vertice printer = end;
+            while (printer != null && printer.from != null) {
+                list.add(printer.from.name);
+                printer = printer.from;
+                if (printer == start) {
+                    break;
+                }
+            }
+
+            System.out.println("");
+            for (int i = list.size() - 1; i >= 0; i--) {
+                if (i != 0) {
+                    System.out.print(list.get(i) + ", ");
+                } else {
+                    System.out.print(list.get(i));
+                }
+            }
+            System.out.println("");
+            return;
+        }
+
+        Vertice current = start;
+        Vertice next = null;
+
+        Iterator<Edge> it;
+        int myCost = current.costToMe;
+        int journeyCost = 0;
+        int leastPath = Integer.MAX_VALUE;
+        Edge currentEdge;
+        Vertice destinationNode;
+        current.visited = true;
+        it = current.edges.iterator();
+        while (it.hasNext()) {
+            currentEdge = it.next();
+            destinationNode = currentEdge.destination;
+            if (destinationNode.visited == true) {
+                continue;
+            }
+
+            destinationNode.from = current;
+
+            journeyCost = myCost + currentEdge.weight;
+            //System.out.println("Journey to: "+destinationNode.name+" is: "+journeyCost);
+
+            if (journeyCost <= destinationNode.costToMe) {
+                destinationNode.costToMe = journeyCost;
+                destinationNode.from = current;
+            }
+
+            if (journeyCost <= leastPath) {
+                next = destinationNode;
+                leastPath = journeyCost;
+
+            }
+        }
+
+        dijkstra2(next, end);
+    }
+    
+    /**
+     * Topological sort of graph
+     * @param graph  graph to sort
+     */
+    static public void topologicalSort(Graph graph) {
+        Iterator<Graph.Vertice> it = graph.graphPlain.values().iterator();
+        Graph.Vertice temp = null;
+        //System.out.println("recall");
+        while (it.hasNext()) {
+            temp = it.next();
+            if (temp.froms.isEmpty()) {
+                System.out.print(temp.name + " ");
+                break;
+            }
+        }
+
+        if (temp != null) {
+            Iterator<Graph.Edge> it2 = temp.edges.iterator();
+            while (it2.hasNext()) {
+                it2.next().destination.froms.remove(temp);
+            }
+            graph.graphPlain.remove(temp.name);
+
+        }
+
+        if (!graph.graphPlain.isEmpty()) {
+            topologicalSort(graph);
         }
 
     }
@@ -221,12 +378,18 @@ public class Graph<T> {
         String name;
         ArrayList<Edge> edges;
         boolean visited;
+        int costToMe;
+        Vertice from; //used by dijstra
+        ArrayList<Vertice> froms;
 
         Vertice(String name, T content) {
             this.name = name;
             this.content = content;
             edges = new ArrayList<>();
             visited = false;
+            costToMe = Integer.MAX_VALUE;
+            from = null;
+            froms = new ArrayList<>();
         }
 
         /**
@@ -288,9 +451,9 @@ public class Graph<T> {
      * Graph main/test method....uncomment to run
      *
      * @param args command line arguments
-     *//*
-    public static void main(String[] args) {
-        Graph<String> graph = new Graph<>();
+     */
+    //public static void main(String[] args) {
+/*        Graph<String> graph = new Graph<>();
         String[] location = {"United Kingdon", "United States", "Canada", "Nigeria", "South Africa", "Rest of the World"};
 
         //MAKE GRAPH
@@ -309,104 +472,114 @@ public class Graph<T> {
         graph.addVertice("Sokoto", location[3]);
         graph.addVertice("Illela", location[3]);
 
-        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Ibadan"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Benin Republic"), 0, 2);
+        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Ibadan"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Benin Republic"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Ondo"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Ondo"), 0, 2);
+        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Ondo"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Ondo"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Ondo"), graph.graphPlain.get("Port-Harcourt"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Port-Harcourt"), graph.graphPlain.get("Delta"), 0, 0);
+        graph.makeEdge(graph.graphPlain.get("Ondo"), graph.graphPlain.get("Port-Harcourt"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Port-Harcourt"), graph.graphPlain.get("Delta"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Abuja"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Abuja"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Kwara"), 0, 0);
+        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Abuja"), 30, 0);
+        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Abuja"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Ibadan"), graph.graphPlain.get("Kwara"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Kano"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Abuja"), graph.graphPlain.get("Kano"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Abuja"), graph.graphPlain.get("Kaduna"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Kano"), graph.graphPlain.get("Kaduna"), 0, 0);
+        graph.makeEdge(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Kano"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Abuja"), graph.graphPlain.get("Kano"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Abuja"), graph.graphPlain.get("Kaduna"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Kano"), graph.graphPlain.get("Kaduna"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Kaduna"), graph.graphPlain.get("Kebbi"), 0, 0);
+        graph.makeEdge(graph.graphPlain.get("Kaduna"), graph.graphPlain.get("Kebbi"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Kebbi"), graph.graphPlain.get("Sokoto"), 0, 0);
+        graph.makeEdge(graph.graphPlain.get("Kebbi"), graph.graphPlain.get("Sokoto"), 20, 0);
 
-        graph.makeEdge(graph.graphPlain.get("Sokoto"), graph.graphPlain.get("Illela"), 0, 2);
+        graph.makeEdge(graph.graphPlain.get("Sokoto"), graph.graphPlain.get("Illela"), 20, 0);
 
         graph.addVertice("Niamey", location[5]);
         graph.addVertice("Rabatt", location[5]);
 
-        graph.makeEdge(graph.graphPlain.get("Illela"), graph.graphPlain.get("Niamey"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Niamey"), graph.graphPlain.get("Rabatt"), 0, 0);
-
+        graph.makeEdge(graph.graphPlain.get("Illela"), graph.graphPlain.get("Niamey"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Niamey"), graph.graphPlain.get("Rabatt"), 20, 0);
+        */
+        /*
         graph.addVertice("Barcelona", location[5]);
         graph.addVertice("Rome", location[5]);
         graph.addVertice("Brussels", location[5]);
 
-        
-        graph.makeEdge(graph.graphPlain.get("Rabatt"), graph.graphPlain.get("Barcelona"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Rome"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Brussels"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("Brussels"), 0, 2);
-         
+        graph.makeEdge(graph.graphPlain.get("Rabatt"), graph.graphPlain.get("Barcelona"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Rome"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Brussels"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("Brussels"), 20, 2);
+
         graph.addVertice("London", location[0]);
         graph.addVertice("Leeds", location[0]);
         graph.addVertice("Manchester", location[0]);
         graph.addVertice("Edingbrough", location[0]);
         graph.addVertice("Cambridge", location[0]);
         graph.addVertice("Watford", location[0]);
-        
-        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("London"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Manchester"), 0, 2);
 
-        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("London"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("Manchester"), 0, 2);
+        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("London"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Barcelona"), graph.graphPlain.get("Manchester"), 20, 2);
 
-        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Manchester"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Leeds"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Watford"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Cambridge"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Leeds"), graph.graphPlain.get("Edingbrough"), 0, 2);
+        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("London"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Rome"), graph.graphPlain.get("Manchester"), 20, 2);
 
-        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Lagos"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Lagos"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Rabatt"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Rabatt"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Abuja"), 0, 2);
-         
+        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Manchester"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Leeds"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Watford"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Cambridge"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Leeds"), graph.graphPlain.get("Edingbrough"), 20, 2);
+
+        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Lagos"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Lagos"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("London"), graph.graphPlain.get("Rabatt"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Rabatt"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Manchester"), graph.graphPlain.get("Abuja"), 20, 2);
+
         graph.addVertice("New York", location[1]);
         graph.addVertice("Seattle", location[1]);
         graph.addVertice("Carlifornia", location[1]);
         graph.addVertice("Pensylvania", location[1]);
-        
-        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("London"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Lagos"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Abuja"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Brussels"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Seattle"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Seattle"), graph.graphPlain.get("Carlifornia"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Carlifornia"), graph.graphPlain.get("Pensylvania"), 0, 2);
-         
+
+        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("London"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Lagos"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Abuja"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Brussels"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("New York"), graph.graphPlain.get("Seattle"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Seattle"), graph.graphPlain.get("Carlifornia"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Carlifornia"), graph.graphPlain.get("Pensylvania"), 20, 2);
+
         graph.addVertice("Toronto", location[2]);
         graph.addVertice("Montreal", location[2]);
         graph.addVertice("British Columbia", location[2]);
-        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("New York"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("London"), 0, 1);
-        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Lagos"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Montreal"), 0, 0);
-        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("British Columbia"), 0, 0);
-     
+        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("New York"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("London"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Lagos"), 20, 1);
+        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Montreal"), 20, 0);
+        graph.makeEdge(graph.graphPlain.get("Toronto"), graph.graphPlain.get("British Columbia"), 20, 0);
+
         graph.addVertice("Cape Town", location[4]);
         graph.addVertice("Pretoria", location[4]);
-        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("New York"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Brussels"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Pretoria"), 0, 2);
-        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Abuja"), 0, 2);
-        
+        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("New York"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Brussels"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Pretoria"), 20, 2);
+        graph.makeEdge(graph.graphPlain.get("Cape Town"), graph.graphPlain.get("Abuja"), 20, 2);
+         */
+        /*
         Queue queue = new LinkedList<>();
         Queue<String> prefixQueue = new LinkedList<>();
+
+        //Test Depth first search
         //graph.depthFirstSearch(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Sokoto"), "Toronto");
-        graph.breadthFirstSearch(graph.graphPlain.get("Toronto"), graph.graphPlain.get("Delta"), prefixQueue, queue, "Toronto");
-    }
-*/
+        //Tests breadth first search
+        //graph.breadthFirstSearch(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Cape Town"), prefixQueue, queue, "Lagos");
+        //Test Dijsktra....Make sure all cycles in the graph are gotten rid of, else dijstra would get stuck up
+        //graph.graphPlain.get("Lagos").costToMe = 0;
+        //graph.dijkstra2(graph.graphPlain.get("Lagos"), graph.graphPlain.get("Sokoto"));
+        //Test Topological Sort
+        //Graph.topologicalSort(graph);
+    */
+//    }
+
 }
