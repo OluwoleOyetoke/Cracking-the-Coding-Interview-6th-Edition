@@ -17,17 +17,20 @@
 package Trees_And_Graphs;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
+
 
 /**
- * <b>Graph Implementation</b>
+ * <b>Graph Implementation 2</b>
+ * <ol>
+ * <li>Add vertices</li>
+ * <li>Depth First Search</li>
+ * <li>Breadth First Search</li>
+ * <li>Dijkstra</li>
+ * <li>Topological Sort</li>
+ * </ol>
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
@@ -54,20 +57,6 @@ public class Graph<T> {
     public boolean addVertice(String name, T content) {
         Vertice vertice = new Vertice(name, content);
         graphPlain.put(name, vertice);
-        return true;
-    }
-    
-    /**
-     * Remove vertice from graph
-     * @param vertice vertice
-     * @return true/false true of successful and false if otherwise
-     */
-    public boolean removeVertice(Vertice vertice) {
-        graphPlain.remove(vertice.name);
-        Iterator<Edge> it = vertice.edges.iterator();
-            while (it.hasNext()) {
-                it.next().destination.froms.remove(vertice);
-            }
         return true;
     }
     
