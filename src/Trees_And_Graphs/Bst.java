@@ -40,7 +40,7 @@ public class Bst {
      */
     public boolean add(int value) {
         if (root == null) {
-            root.value = value;
+            root = new Node(value);
             return true;
         }
 
@@ -331,6 +331,32 @@ public class Bst {
                 minimum=root.value;
             }
             return minimum;
+    }
+    
+        /**
+     * Print out heap using level order traversal
+     * @param root node to start search from
+     * @param level level to print
+     */
+    public void levelOrderTraversal(Node root, int level) {
+        if (root == null) {
+            return;
+        }
+
+        if (level == 0) {
+            System.out.print(root.value + ", ");
+        } else {
+            levelOrderTraversal(root.left, level - 1);
+            levelOrderTraversal(root.right, level - 1);
+        }
+    }
+    
+       public void printTree(int level){
+        System.out.println("\nLEVEL ORDER TRAVERSAL: ");
+        for (int i = 0; i <= level; i++) {
+           levelOrderTraversal(root, i);
+            System.out.println("\n");
+        }
     }
     
     /**
