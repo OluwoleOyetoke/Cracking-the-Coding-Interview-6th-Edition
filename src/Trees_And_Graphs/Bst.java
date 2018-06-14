@@ -365,6 +365,7 @@ public class Bst {
     class Node implements Comparable {
 
         int value;
+        int height;
         Node left;
         Node right;
         Node ancestor;
@@ -374,6 +375,7 @@ public class Bst {
             left = null;
             right = null;
             ancestor = null;
+            height=0;
         }
 
         public int getValue() {
