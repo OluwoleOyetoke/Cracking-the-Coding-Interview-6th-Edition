@@ -44,6 +44,8 @@ public class Question_8 {
             return;
         }
         findCommonAncestor(tree.root, a, b);
+        Bst.Node found = findCommonAncestor2(tree.root, a.value, b.value);
+        System.out.println("Method 2: Common ancestot for :" + a.value + " and " + b.value + " = " + found.value);
     }
 
     /**
@@ -59,7 +61,7 @@ public class Question_8 {
         }
         if (a.value == b.value) {
             if(root.value == a.value){
-                System.out.println("Same: Common ancestor for :" + a.value + " and " + b.value + " = " + root.ancestor.value);
+                System.out.println("Same: Common ancestor for :" + a.value + " and " + b.value + " = " + root.value);
                return;
             } 
         }
@@ -75,13 +77,28 @@ public class Question_8 {
         findCommonAncestor(root.left, a, b);
         findCommonAncestor(root.right, a, b);
     }
+    
+    public Bst.Node findCommonAncestor2(Bst.Node node, int t1, int t2) {
+    if(node == null) {
+        return null;
+    }
+    if(node.value > t2 && node.value > t1) {
+        // both targets are left
+        return findCommonAncestor2(node.left, t1, t2);
+    } else if (node.value < t2 && node.value < t1) {
+        // both targets are right
+        return findCommonAncestor2(node.right, t1, t2);
+    } else {
+        return node;
+    }
+}
 
     /**
      * Trees and graphs question_8 main/test method....uncomment to run
      *
      * @param args command line arguments
      * @throws TreeException Tree Exception
-     *//*
+     */
     public static void main(String[] args) throws TreeException {
         //LOAD BST
         Bst bst = new Bst(7);
@@ -97,5 +114,5 @@ public class Question_8 {
         Question_8 q8 = new Question_8();
         q8.solve(bst, a, b);
     }
-*/
+
 }
