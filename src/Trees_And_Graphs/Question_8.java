@@ -65,10 +65,10 @@ public class Question_8 {
         }
 
         //assuming no duplicate values
-        if (a.value < root.value && b.value > root.value) {
+        if (a.value <= root.value && b.value > root.value) {
             System.out.println("Common ancestot for :" + a.value + " and " + b.value + " = " + root.value);
             return;
-        } else if (b.value < root.value && a.value > root.value) {
+        } else if (b.value < root.value && a.value >= root.value) {
             System.out.println("Common ancestot for :" + a.value + " and " + b.value + " = " + root.value);
             return;
         }
