@@ -229,8 +229,7 @@ public class Bst {
         inOrderTraversal(root.right);
 
     }
-
-    /**
+  /**
      * Pre order traversal of BST
      * @param root root to start traversal from
      */
@@ -244,6 +243,7 @@ public class Bst {
         preOrderTraversal(root.right);
 
     }
+  
     /**
      * Post order traversal of the BST
      * @param root root to start traversal from
@@ -362,7 +362,7 @@ public class Bst {
     /**
      * Node class
      */
-    class Node implements Comparable {
+    static class Node implements Comparable {
 
         int value;
         int height;
