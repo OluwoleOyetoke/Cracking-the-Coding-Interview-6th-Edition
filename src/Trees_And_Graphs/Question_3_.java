@@ -75,6 +75,7 @@ public class Question_3_ {
       /**
      * Pre order traversal of BST
      * @param root root to start traversal from
+     * @param level level
      */
     public void preOrderTraversal(Bst.Node root, int  level) {
         if (root == null) {

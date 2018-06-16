@@ -16,7 +16,6 @@
  */
 package Trees_And_Graphs;
 
-
 /**
  * <b>First Common Ancestor:</b> Design an algorithm and write code to find the
  * first common ancestor of two nodes in a binary tree. Avoid storing additional
@@ -27,13 +26,15 @@ package Trees_And_Graphs;
  * gmail.com{@literal >}
  */
 public class Question_8 {
-    
+
     /**
-     * First check if the two values whose ancestors are to be found are present in the tree
+     * First check if the two values whose ancestors are to be found are present
+     * in the tree
+     *
      * @param tree tree
      * @param a node to find its common ancestor with b
      * @param b node to find its common ancestor with a
-     * @throws TreeException  tree exception
+     * @throws TreeException tree exception
      */
     public void solve(Bst tree, Bst.Node a, Bst.Node b) throws TreeException {
         //check if tree contains a and b
@@ -43,62 +44,90 @@ public class Question_8 {
             System.out.println("Common ancestor not calculated. One of the numbers not in tree");
             return;
         }
-        findCommonAncestor(tree.root, a, b);
-        Bst.Node found = findCommonAncestor2(tree.root, a.value, b.value);
-        System.out.println("Method 2: Common ancestot for :" + a.value + " and " + b.value + " = " + found.value);
+        findCommonAncestor1(tree.root, a.value, b.value);
+        Bst.Node node = findCommonAncestor2(tree.root, a.value, b.value);
+        System.out.println("Method 2: Common ancestot for :" + a.value + " and " + b.value + " = " + node.value);
     }
 
     /**
-     * In order traversal of BSt to find common ancestor
+     * Method one (Assuming its a BST and t1, t2 are present in tree)
      *
-     * @param root root to start traversal from
-     * @param a node to find its common ancestor with b
-     * @param b node to find its common ancestor with a
+     * @param node root node
+     * @param t1 content of node to find its common ancestor with t2
+     * @param t2 content of node to find its common ancestor with t1
+     * @return node first common ancestor
      */
-    public void findCommonAncestor(Bst.Node root, Bst.Node a, Bst.Node b) {
-        if (root == null || a == null || b == null) {
-            return;
-        }
-        if (a.value == b.value) {
-            if(root.value == a.value){
-                System.out.println("Same: Common ancestor for :" + a.value + " and " + b.value + " = " + root.value);
-               return;
-            } 
+    public Bst.Node findCommonAncestor1(Bst.Node node, int t1, int t2) {
+        if (node == null) {
+            return null;
         }
 
-        //assuming no duplicate values
-        if (a.value <= root.value && b.value > root.value) {
-            System.out.println("Common ancestot for :" + a.value + " and " + b.value + " = " + root.value);
-            return;
-        } else if (b.value < root.value && a.value >= root.value) {
-            System.out.println("Common ancestot for :" + a.value + " and " + b.value + " = " + root.value);
-            return;
+        if (t1 == t2) {
+            if (node.value == t1) {
+                if (node.ancestor != null) {
+                    System.out.println("Same: Common ancestor for :" + t1 + " and " + t2 + " = " + node.ancestor.value);
+                } else {
+                    System.out.println("Same: Common ancestor for :" + t1 + " and " + t2 + " = null");
+                }
+                return node;
+            }
         }
-        findCommonAncestor(root.left, a, b);
-        findCommonAncestor(root.right, a, b);
+        if (node.value > t2 && node.value > t1) {
+            // both targets are left
+            return findCommonAncestor1(node.left, t1, t2);
+        } else if (node.value < t2 && node.value < t1) {
+            // both targets are right
+            return findCommonAncestor1(node.right, t1, t2);
+        } else {
+            System.out.println("Method 1: Common ancestot for :" + t1 + " and " + t2 + " = " + node.value);
+            return node;
+        }
     }
-    
-    public Bst.Node findCommonAncestor2(Bst.Node node, int t1, int t2) {
-    if(node == null) {
-        return null;
+
+    /**
+     * Assuming its not a BST
+     *
+     * @param node root node
+     * @param a content of node to find its common ancestor with b
+     * @param b content of node to find its common ancestor with a
+     * @return node first common ancestor..returns null if none
+     */
+    public Bst.Node findCommonAncestor2(Bst.Node node, int a, int b) {
+        if (node == null) {
+            return null;
+        }
+
+        Bst.Node left = null;
+        Bst.Node right = null;
+        if (node.value == a || node.value == b) {
+            return node;
+        }
+        left = findCommonAncestor2(node.left, a, b);
+        right = findCommonAncestor2(node.right, a, b);
+
+        if (left != null && right != null) {
+            System.out.println("Method 2: Common ancestot for :" + a + " and " + b + " = " + node.value);
+            return node;
+        }
+
+        if (left != null) {
+            return left;
+        }
+        if (right != null) {
+            return right;
+        }else{
+          return null;  
+        }
+
+        
     }
-    if(node.value > t2 && node.value > t1) {
-        // both targets are left
-        return findCommonAncestor2(node.left, t1, t2);
-    } else if (node.value < t2 && node.value < t1) {
-        // both targets are right
-        return findCommonAncestor2(node.right, t1, t2);
-    } else {
-        return node;
-    }
-}
 
     /**
      * Trees and graphs question_8 main/test method....uncomment to run
      *
      * @param args command line arguments
      * @throws TreeException Tree Exception
-     */
+     *//*
     public static void main(String[] args) throws TreeException {
         //LOAD BST
         Bst bst = new Bst(7);
@@ -109,10 +138,10 @@ public class Question_8 {
         bst.add(9);
         bst.add(11);
         bst.add(1);
-        Bst.Node a = new Bst.Node(1);
-        Bst.Node b = new Bst.Node(14);
+        Bst.Node a = new Bst.Node(9);
+        Bst.Node b = new Bst.Node(10);
         Question_8 q8 = new Question_8();
         q8.solve(bst, a, b);
     }
-
+*/
 }

@@ -177,10 +177,10 @@ public class Bst {
     /**
      * Search through BST for a particular value
      * @param value value to search for
-     * @return valueFound valueFound (if found)
+     * @return true/false true if found and false if otherwise
      * @throws TreeException Tree Exception
      */
-    public int search(int value) throws TreeException {
+    public boolean search(int value) throws TreeException {
         if (root == null) {
             throw new TreeException("Tree is empty");
         }
@@ -194,25 +194,25 @@ public class Bst {
 
             if (dec == 0) {//found
                 System.out.println("Node with value " + value + " Found");
-                return value;
+                return true;
             } else if (dec < 0) {//is somewhere on the left
                 if (current.left == null) {
                     System.out.println(value + " not available in tree");
-                    return 0;
+                    return false;
                 } else {
                     current = current.left;
                 }
             } else {//is somewhere on the right
                 if (current.right == null) {
                     System.out.println(value + " not available in tree");
-                    return 0;
+                    return false;
                 } else {
                     current = current.right;
                 }
             }
         }
 
-        return 0; //will never get here
+        return false; //will never get here
     }
     
     /**
