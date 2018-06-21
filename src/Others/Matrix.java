@@ -96,6 +96,44 @@ public class Matrix {
         }
         System.out.println("\n");
     }
+    
+    /**
+     * Print matrix diagonally
+     * @param matrix matrix to print
+     */
+     public void diagonalPrint(int[][] matrix) {
+        if (matrix == null) {
+            return;
+        }
+          //System.out.println("\n");
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.println("");
+            x = 0;
+            y = i;
+            System.out.print(matrix[x][y] + ", ");
+            for (int k = 0; k < i; k++) {
+                x = x + 1;
+                y = y - 1;
+                System.out.print(matrix[x][y] + ", ");
+            }
+        }
+
+        for (int j = 1; j < matrix[0].length; j++) {
+            System.out.println("");
+            x = j;
+            y = matrix[0].length-1;
+            System.out.print(matrix[x][y] + ", ");
+            for (int k = 0; k < matrix[0].length-j-1; k++) {
+                x = x + 1;
+                y = y - 1;
+                System.out.print(matrix[x][y] + ", ");
+            }
+        }
+          System.out.println("\n");
+    }
+
 
     /**
      * Print matrix in spiral order
@@ -192,12 +230,14 @@ public class Matrix {
         Matrix mat = new Matrix();
         System.out.println("Initial Matrix");
         mat.printMatrix(matrix);
+            System.out.println("Diagonal Print\n");
+        mat.diagonalPrint(matrix);
+          System.out.println("Spiral Print\n");
+        mat.printInSpiral(matrix);
         //int[][] x = {{2,5}, {6,7}};
         int[][] rotated = mat.rotateMatrixNxN(matrix);
         System.out.println("Rotated Matrix");
         mat.printMatrix(rotated);
-        System.out.println("Spiral Print\n");
-        mat.printInSpiral(matrix);
     }
 */
 }
