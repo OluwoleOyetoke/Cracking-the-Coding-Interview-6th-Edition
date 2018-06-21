@@ -55,7 +55,7 @@ public class Matrix {
         for (int y = 0; y < stopY; y++) {
             counter = 0;
             startX = y;
-            stopX = matrix.length - (startX * 2) - 1;
+            stopX = matrix.length - startX - 1;
             /* * */
             for (int x = startX; x < stopX; x++) {
                 temp1 = matrix[y][startX + counter];
