@@ -26,7 +26,7 @@ public class Main {
     /**
      * 
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args){
         AbstractFactory fact = (ShapeFactory) FactoryOfFactories.getFactory("SHAPE");
         Shape circle = (Circle) fact.getShape("CIRCLE");
@@ -34,5 +34,5 @@ public class Main {
         
         Context con = new Context(new AddOperation());
         con.executeStrategy(5, 5);
-    }
+    }*/
 }
