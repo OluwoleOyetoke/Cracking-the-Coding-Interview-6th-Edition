@@ -99,7 +99,7 @@ public class Question_2 {
      * Bit Manipulation Question_2 main/test method....uncomment to run
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         Question_2 q2 = new Question_2();
         String binary = q2.getFractionalBinary(0.25);
@@ -107,6 +107,6 @@ public class Question_2 {
 
         binary = q2.realToBinary(4.25);
         System.out.println("Binary Representation for 4.25: " + binary);
-    }
+    }*/
 
 }
