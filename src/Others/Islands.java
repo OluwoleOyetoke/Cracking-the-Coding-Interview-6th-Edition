@@ -26,7 +26,7 @@ public class Islands {
      *
      * @param x x coordinate to check
      * @param y y coordinate to check
-     * @return
+     * @return true/false true if safe and false if otherwise
      */
     public boolean isSafeIndex(int x, int y) {
         if (x < 0 || x >= graph.length || y < 0 || y >= graph[0].length) {
@@ -92,7 +92,7 @@ public class Islands {
      * @param auxGraph modified graph
      * @param x x coordinate to start from
      * @param y y coordinate to start from
-     * @return
+     * @return minimum minimum value in auxiliary graph
      */
     public int findMin(int[][] auxGraph, int x, int y) {
         int[][] neighToCheck = {{x - 1, y - 1}, {x, y - 1}, {x - 1, y}};

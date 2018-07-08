@@ -14,13 +14,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.AbstractFactoryPattern;
 
 /**
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public interface Strategy {
-    int doOperation(int a, int b);
+public class Employee {
+    
+    String name;
+    int level;
+    String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }    
+    
 }

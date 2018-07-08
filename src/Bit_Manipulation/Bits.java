@@ -18,7 +18,8 @@ package Bit_Manipulation;
 
 /**
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ *  @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
  */
 public class Bits {
     
@@ -94,7 +95,7 @@ public class Bits {
      * To pad the binary to a particular number of bits
      * @param binary to be padded
      * @param toXBits number of required bits
-     * @return 
+     * @return  paddedBits padded Bits
      */
     public String pad(String binary, int toXBits){
         int currentLength = binary.length();

@@ -14,13 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.StrategyPattern;
+
+import Object_Oriented_Design.StrategyPattern.Strategy;
 
 /**
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public class Square extends Shape {
-    
+public class AddOperation implements Strategy {
+
+    @Override
+    public int doOperation(int a, int b) {
+        return a+b;
+    }
+
 }

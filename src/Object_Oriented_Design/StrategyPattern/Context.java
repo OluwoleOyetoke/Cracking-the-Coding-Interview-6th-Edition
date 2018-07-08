@@ -14,18 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.StrategyPattern;
 
 /**
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public class MultiplyOperation implements Strategy {
-
-    @Override
-    public int doOperation(int a, int b) {
-        return a*b;
+public class Context {
+    private Strategy strategy;
+    
+    public Context(Strategy strategy){
+        this.strategy = strategy;
     }
+    
+    
+    public void executeStrategy(int a, int b){
+        int outcome = strategy.doOperation(a, b);
+        
+        System.out.println("Outcome: "+outcome);
+    }
+    
     
 }

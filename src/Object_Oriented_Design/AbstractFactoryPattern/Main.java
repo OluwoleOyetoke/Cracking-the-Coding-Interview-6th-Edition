@@ -14,13 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.AbstractFactoryPattern;
 
 /**
- *
+ * 
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public class Teacher extends Employee {
+public class Main {
     
+    /**
+     * Uncomment to run
+     * @param args command line arguments
+     *//*
+    public static void main(String[] args){
+        AbstractFactory fact = (ShapeFactory) FactoryOfFactories.getFactory("SHAPE");
+        Shape circle = (Circle) fact.getShape("CIRCLE");
+        circle.getRadius();
+    }*/
 }

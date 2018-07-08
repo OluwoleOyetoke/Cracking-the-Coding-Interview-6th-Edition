@@ -25,7 +25,8 @@ package Bit_Manipulation;
  * = 2, because M could not fully fit between bit 3 and bit 2. EXAMPLE Input: N
  * 10000000000, M = 10011 Output: N = 10001001100
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ *  @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
  */
 public class Question_1 {
 

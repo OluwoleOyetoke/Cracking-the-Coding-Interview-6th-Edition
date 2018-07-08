@@ -14,26 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.AbstractFactoryPattern;
+
 
 /**
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public class Context {
-    private Strategy strategy;
-    
-    public Context(Strategy strategy){
-        this.strategy = strategy;
+public class AnimalFactory extends AbstractFactory {
+
+    @Override
+    Shape getShape(String shape) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    public void executeStrategy(int a, int b){
-        int outcome = strategy.doOperation(a, b);
-        
-        System.out.println("Outcome: "+outcome);
+
+    @Override
+    Employee getEmployee(String employee) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    Animal getAnimal(String animal) {
+           if(animal.equals("DOG")){
+            return new Dog();
+        }
+        else if(animal.equals("CAT")){
+            return new Cat();
+        }else if(animal.equals("FISH")){
+            return new Fish();
+        }else return null;
+    }
     
 }

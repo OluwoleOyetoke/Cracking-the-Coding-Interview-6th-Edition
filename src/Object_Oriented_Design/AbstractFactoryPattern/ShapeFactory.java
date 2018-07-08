@@ -14,18 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Object_Oriented_Design;
+package Object_Oriented_Design.AbstractFactoryPattern;
 
 /**
  *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
-public class AddOperation implements Strategy {
+public class ShapeFactory extends AbstractFactory {
 
     @Override
-    public int doOperation(int a, int b) {
-        return a+b;
+    Shape getShape(String shape) {
+        if (shape.equals("CIRCLE")) {
+            return new Circle();
+        } else if (shape.equals("SQUARE")) {
+            return new Square();
+        } else if (shape.equals("RECTANGLE")) {
+            return new Rectangle();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    Employee getEmployee(String employee) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    Animal getAnimal(String animal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
