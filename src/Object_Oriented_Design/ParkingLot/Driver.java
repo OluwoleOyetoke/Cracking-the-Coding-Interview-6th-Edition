@@ -18,6 +18,7 @@ package Object_Oriented_Design.ParkingLot;
 
 /**
  * Driver Class
+ *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
@@ -25,7 +26,7 @@ public class Driver {
 
     String name;
     Vehicle car;
-    
+
     Driver(String name) {
         this.name = name;
     }
@@ -50,6 +51,25 @@ public class Driver {
 
     public void setCar(Vehicle car) {
         this.car = car;
+    }
+
+    public void parkIn(Lot parkingLot) {
+        if (this.car == null) {
+            System.out.println("This driver has no car");
+        }
+        parkingLot.parkIn(this.car);
+    }
+
+    public void driveOut(Lot parkingLot) {
+        if (this.car == null) {
+            System.out.println("This driver has no car");
+        }
+        parkingLot.driveOut(this.car);
+    }
+    
+    public void attachToVehicle(Vehicle vehicle){
+        this.car = vehicle;
+        this.car.setDriver(this);
     }
 
 }

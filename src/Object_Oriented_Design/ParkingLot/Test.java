@@ -20,11 +20,12 @@ package Object_Oriented_Design.ParkingLot;
  * <b>Parking Lot: </b>Design a parking lot using object-oriented principles
  * Assumptions:
  * <ol>
- * 
+ *
  * <li>Vehicle = Car, Moto Cycle,Busses and Trailers</li>
  * <li>All vehicles can park anywhere that is available<li>
  * <li>The car park has only one level</li>
- * <li>The car park space is generic. No special preferences for disabled parking</li>
+ * <li>The car park space is generic. No special preferences for disabled
+ * parking</li>
  * <li>All vehicles need equal parking space i.e 1 unit</li>
  * </ol>
  *
@@ -38,16 +39,22 @@ public class Test {
      *
      * @param args command line arguments
      *//*
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Driver driver = new Driver("Jason Statham");
-        Vehicle car = new Vehicle("JBenz", driver);
-        Vehicle car2 = new Vehicle("NToyota", driver);
+        Driver driver2 = new Driver("Westly Snipes");
+
+        Vehicle car = new Vehicle("Bosses's Benz");
+        Vehicle car2 = new Vehicle("Team's Toyota");
+
+        driver.attachToVehicle(car);
+        driver2.attachToVehicle(car2);
+
         Lot parkingLot = new Lot("Central London", 5);
-        
-        parkingLot.parkIn(car);
-        parkingLot.parkIn(car2);
-        parkingLot.driveOut(car);
-        parkingLot.parkIn(car2);
-        parkingLot.parkIn(car);  
-    }*/ 
+
+        driver.parkIn(parkingLot);
+        driver2.parkIn(parkingLot);
+        driver.driveOut(parkingLot);
+        driver2.parkIn(parkingLot);
+        driver.parkIn(parkingLot);
+    }*/
 }

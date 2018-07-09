@@ -22,6 +22,7 @@ import java.util.Queue;
 
 /**
  * Parking Lot class
+ *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  * gmail.com{@literal >}
  */
@@ -31,38 +32,42 @@ public class Lot {
     int maxParking;
     HashMap<String, Lot.Space> spaces;
     Queue<String> spaceLocations;
-    
-    Lot(String name, int maxParking){
+    HashMap<String, Vehicle> vehicles;
+
+    Lot(String name, int maxParking) {
         this.name = name;
         this.maxParking = maxParking;
         spaces = new HashMap<>();
-         spaceLocations = new LinkedList();
+        vehicles = new HashMap<>();
+        spaceLocations = new LinkedList();
         //carete spaces
         String tempName = "space-";
         String toPlaceIn = "";
-        for(int i=0; i<maxParking; i++){
-            toPlaceIn =tempName+""+i;
+        for (int i = 0; i < maxParking; i++) {
+            toPlaceIn = tempName + "" + i;
             Lot.Space space = new Lot.Space(toPlaceIn);
             spaceLocations.add(toPlaceIn);
             spaces.put(toPlaceIn, space);
         }
-        
-        
+
     }
-    
-    public boolean isSpaceAvailable(){
+
+    public boolean isSpaceAvailable() {
         return true;
     }
-    
-    public boolean parkIn(Vehicle car){
-        if((spaceLocations.size()<=0)){
+
+    public boolean parkIn(Vehicle car) {
+        if ((spaceLocations.size() <= 0)) {
             System.out.println("Car Park is full");
             return false;
-        }else if(car.isParked()){
-            System.out.println(car.getName()+" is already parked");
+        } else if (car.isParked()) {
+            System.out.println(car.getName() + " is already parked");
             return false;
-        }else if(car.getDriver()==null){
-              System.out.println(car.getName()+" has no driver. Put a driver in to move it");
+        } else if (car.getDriver() == null) {
+            System.out.println(car.getName() + " has no driver. Put a driver in to move it");
+            return false;
+        } else if (vehicles.containsValue(car)) {
+            System.out.println(car.getName() + " is already parked");
             return false;
         }
         //here, we could implement a logic to park car at a specific spot/level within the car park
@@ -70,26 +75,28 @@ public class Lot {
         spaces.get(loc).filled = true;
         car.setParked(true);
         car.setParkLocation(loc);
-        System.out.println("Parked "+car.getName()+" into: "+loc);
+        vehicles.put(car.getName(), car);
+        System.out.println(car.getDriver().getName()+" Parked " + car.getName() + " into: " + loc+" in the "+this.name+" parking space");
         return true;
     }
-    
-    public void driveOut(Vehicle car){
-        if(!car.isParked()){
+
+    public void driveOut(Vehicle car) {
+        if (!car.isParked()) {
             System.out.println("Car not parked before");
             return;
-        }else if(car.getDriver()==null){
-              System.out.println("Vehicle has no driver. Put a driver in to move it");
+        } else if (car.getDriver() == null) {
+            System.out.println("Vehicle has no driver. Put a driver in to move it");
             return;
         }
-        
+
         String loc = car.getParkLocation();
         car.setParked(false);
-        spaces.get(loc).filled=false;
-        spaceLocations.add(loc);  
-          System.out.println("Drove "+car.getName()+" Out of: "+loc);
+        spaces.get(loc).filled = false;
+        spaceLocations.add(loc);
+        vehicles.remove(car.getName());
+        System.out.println(car.getDriver().getName()+" Drove " + car.getName() + " Out of: " + loc+" in the "+this.name+" parking space");
     }
-    
+
     private class Space {
 
         Space(String name) {

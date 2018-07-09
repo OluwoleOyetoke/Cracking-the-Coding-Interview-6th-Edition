@@ -33,14 +33,6 @@ public class Vehicle {
         parked = false;
     }
 
-    Vehicle(String name, Driver driver) {
-        this.name = name;
-        this.driver = driver;
-        driver.setCar(this);
-        parked = false;
-    }
-
-
     public Driver getDriver() {
         return driver;
     }
@@ -73,13 +65,5 @@ public class Vehicle {
 
     public void setParked(boolean parked) {
         this.parked = parked;
-    }
-
-    public void park() {
-
-    }
-
-    public void driveOut() {
-
     }
 }
