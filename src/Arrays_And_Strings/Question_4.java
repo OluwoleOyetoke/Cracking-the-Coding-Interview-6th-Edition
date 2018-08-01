@@ -97,12 +97,47 @@ public class Question_4 {
         }
         if((sentence.length()%2==0) && alphaBit==0 ){
             return true;
-        }else if((sentence.length()%2!=0) && alphaBit>1 ){
+        }else if((sentence.length()%2!=0) && countOnes(alphaBit)==1 ){
             return true;
         }else{
             return false;
         }
     }
+    
+    /**
+     * Counts number of 1s in a number
+     * @param number number
+     * @return numberOfOnes number of Ones
+     */
+    static public int countOnes(int number){
+	double logResult = Math.log(number)/Math.log(2);
+	int noOfBits = (int) Math.floor(logResult)+1;
+	int check=0;
+	int flipCount=0;
+	for(int i=0; i<noOfBits; i++){
+		check = isOne(number, i);
+		if(check==1){
+			flipCount++;
+	}
+	}
+	return flipCount;
+}
+    
+    /**
+     * Checks if an index in number has an ON or OFF bit
+     * @param number number
+     * @param index index
+     * @return 1/0 1 = true, 0 = false;
+     */
+    static public int isOne(int number, int index){
+	int mask = 0;
+	mask = 1<<index;
+	if((number & mask)>0){
+		return 1;
+	}else{
+		return 0;
+	}
+}
 
     /**
      * Generates all permutations of the input string (duplicates un-handled)

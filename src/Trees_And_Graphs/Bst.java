@@ -216,7 +216,7 @@ public class Bst {
     }
     
     /**
-     * In order traversal of BSt
+     * In order traversal of BST
      * @param root root to start traversal from
      */
     public void inOrderTraversal(Node root) {

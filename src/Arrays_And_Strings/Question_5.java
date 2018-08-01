@@ -16,22 +16,26 @@
  */
 package Arrays_And_Strings;
 
-
 /**
  * <b>One Away:</b> There are three types of edits that can be performed on
  * strings: insert a character, remove a character, or replace a character.
  * Given two strings, write a function to check if they are one edit (or zero
  * edits) away...page 91
  *
- * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @} gmail.com{@literal >}
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
  */
 public class Question_5 {
     
-    /**
-     * Solve by sorting the two strings, then walking linearly through the string and making char to char comparison
-     * @param testWord word to be checked if it is 1 or 0 edits away from being same as mainWord
+     /**
+     * Solve by walking linearly through the string and making char to char
+     * comparison
+     *
+     * @param testWord word to be checked if it is 1 or 0 edits away from being
+     * same as mainWord
      * @param mainWord word to be checked against
-     * @return true/false true if testWord is one edit away from being same with mainWord
+     * @return true/false true if testWord is one edit away from being same with
+     * mainWord
      */
     public static boolean solve(String testWord, String mainWord) {
         //get string lengths
@@ -42,7 +46,7 @@ public class Question_5 {
         if (Math.abs(testLength - mainLength) > 1) {
             return false;
         }
-        
+
         //convert to char array
         char[] testWordArray = testWord.toLowerCase().toCharArray();
         char[] mainWordArray = mainWord.toLowerCase().toCharArray();
@@ -50,47 +54,57 @@ public class Question_5 {
         int editCounts = 0;
         int testPointer = 0;
         int mainPointer = 0;
-        int loopLength = (mainLength>testLength)?mainLength:testLength;
-        
+        int loopLength = (mainLength > testLength) ? mainLength : testLength;
+
         for (int i = 0; i < loopLength; i++) {
-            if ((mainWordArray[mainPointer] != testWordArray[testPointer]) && (mainLength < testLength)) {
+            if (testPointer >= testLength || mainPointer >= mainLength) {
                 editCounts++;
-                testPointer++;
-            } else if ((mainWordArray[mainPointer] != testWordArray[testPointer]) && (mainLength > testLength)) {
-                editCounts++;
-                mainPointer++;
-            } else if ((mainWordArray[mainPointer] != testWordArray[testPointer]) && (mainLength == testLength)) {
-                editCounts++;
-                testPointer++;
-                mainPointer++;
-            }else if(mainWordArray[mainPointer] == testWordArray[testPointer]){
-                testPointer++;
-                mainPointer++;
+                continue;
             }
-            
-            //reorganize count (for when difference is at the last string in a set of equal strings)
-            if(testPointer>=testLength){testPointer--;}
-            if(mainPointer>=mainLength){mainPointer--;}
-            
-            //if more than 1 edits has been made
-            if(editCounts>1){
-                return false;
+
+            if (mainWordArray[mainPointer] != testWordArray[testPointer]) {
+                if (testPointer + 1 >= testLength && mainPointer + 1 >= mainLength) {//edit
+                    editCounts++;
+                    testPointer++;
+                    mainPointer++;
+                } else if (testPointer + 1 < testLength && mainPointer + 1 < mainLength) {
+                    if (mainWordArray[mainPointer + 1] == testWordArray[testPointer + 1]) { //edit
+                        mainPointer++;
+                        testPointer++;
+                    } else if (mainWordArray[mainPointer] == testWordArray[testPointer + 1]) {//delete
+                        testPointer++;
+                    } else if (mainWordArray[mainPointer + 1] == testWordArray[testPointer]) {//insert
+                        mainPointer++;
+                    }
+                    editCounts++;
+                } else if (testPointer + 1 < testLength && mainPointer + 1 >= mainLength) {
+                    return false;
+                } else if (testPointer + 1 >= testLength && mainPointer + 1 < mainLength) {
+                    return false;
+                }
+            } else {
+                testPointer++;
+                mainPointer++;
             }
         }
 
+        if (editCounts > 1) {
+            return false;
+        }
         return true;
     }
-    
+
     /**
      * Question_5 main function
+     *
      * @param args Command line arguments
      *//*
     public static void main(String[] args) {
-        boolean answer = false; 
-        String[][] inputs = {{"pale", "ple"}, {"pales", "pale"}, {"pale", "bale"}, {"pale","bake"}, {"soccer", "ssoccerr"}};   
-         for(int i=0; i<inputs.length; i++){
-             answer = solve(inputs[i][0], inputs[i][1]);
-             System.out.println("Is '"+inputs[i][0]+"' 1 edit (del,add,replace) away from becoming '"+inputs[i][1]+"': "+answer);
-         }
+        boolean answer = false;
+        String[][] inputs = {{"pale", "ple"}, {"pales", "pale"}, {"pale", "bale"}, {"pale", "bake"}, {"soccer", "ssoccerr"},{"", "a"}, {"a", "ab"}};
+        for (int i = 0; i < inputs.length; i++) {
+            answer = solve(inputs[i][0], inputs[i][1]);
+            System.out.println("Is '" + inputs[i][0] + "' 1 edit (del,add,replace) away from becoming '" + inputs[i][1] + "': " + answer);
+        }
     }*/
 }
