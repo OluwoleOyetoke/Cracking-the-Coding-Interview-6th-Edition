@@ -14,21 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Scalability_And_System_Design.Cache;
+package Scalability_And_System_Design.Search_Engine;
 
 /**
- *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * Bus Interface
+ * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
-public interface IMachine {
-    void cearCache();
-    void checkYourCache(int queryHash, IMachine.IResponse callback, RequestType requestType, RequestSource from);
-    String search(int queryHash, String query, int count);
-    String processSearch(String query);
-    int checkDataState(int data);
-    
-    //callback
-    interface IResponse{
-        void response(String result, int present, int machineId);
-    }
+public interface IBus {
+
+    boolean request(int queryHash, IMachine.IResponse callback, RequestType requestType, RequestSource from, IMachine requester);
+
+    void register(IMachine machine);
+
+    void invalidateAll(int queryHash); //invalidates all shared version
 }

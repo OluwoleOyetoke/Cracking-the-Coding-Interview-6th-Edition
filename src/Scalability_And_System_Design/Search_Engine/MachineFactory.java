@@ -14,30 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Scalability_And_System_Design.Cache;
+package Scalability_And_System_Design.Search_Engine;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * Factory setting up the backend machines
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
-public class Machine2 implements IMachine {
-     private static Machine2 machine;
-    private Machine2(){
-        
+public class MachineFactory {
+
+    public List<IMachine> machines = new ArrayList<>();
+    public static int NO_OF_MACHINES = 4;
+
+    public List<IMachine> getMachines() {
+        return machines;
     }
-    
-    public static IMachine getMachineInstance(){
-        if(machine==null){
-            machine = new Machine2();
-            Bus.getBusInstance().register(machine); //register machine to the bus
-            return machine;
-        }else{
-            return machine;
+
+    public void setMachines(List<IMachine> machines) {
+        this.machines = machines;
+    }
+
+    List<IMachine> generateMachines() {
+        for (int i = 1; i <= NO_OF_MACHINES; i++) {
+            machines.add(new Machine(i));
         }
+        return machines;
     }
-    @Override
-    public void cearCache() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
