@@ -16,7 +16,6 @@
  */
 package Others;
 
-import java.util.Arrays;
 
 /**
  * <b>Find Primes</b> Find all the prime numbers between n and m
