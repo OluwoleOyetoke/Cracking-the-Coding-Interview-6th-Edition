@@ -17,38 +17,41 @@
 package Object_Oriented_Design.ObjectPool;
 
 /**
- *
- * @author Oluwole Oyetoke oluwoleoyetoke at gmail.com
+ * Fireworks pool
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}gmail.com{@literal >}
  */
 public class FireworksAnimationPool extends ObjectPool<FireworksAnimation> {
     public static FireworksAnimationPool fireworksAnimationPool = null; 
     @Override
     public boolean expire(FireworksAnimation o) {
        //do things that have to do with expiry here
+        System.out.println("Fireworks expired");
        return true;
     }
 
     @Override
     protected FireworksAnimation create() {
+        System.out.println("Fireworks created/recreated");
         return new FireworksAnimation();
     }
 
     @Override
     public boolean validate(FireworksAnimation o) {
        //do validation here
+        System.out.println("Fireworks validated");
        return true;
     }
     
     /**
      * Make singleton
      */
-    private FireworksAnimationPool(long maxPoolSize, long expiryTime){
-        super(maxPoolSize, expiryTime);
+    private FireworksAnimationPool(long maxPoolSize, long expiryTime, long maxChekOutTime){
+        super(maxPoolSize, expiryTime, maxChekOutTime);
     }
     
-    public static FireworksAnimationPool getInstance(){
+    public static synchronized FireworksAnimationPool getInstance(){
         if(fireworksAnimationPool==null){
-            fireworksAnimationPool = new FireworksAnimationPool(30, 30000);
+            fireworksAnimationPool = new FireworksAnimationPool(5, 10000, 2000);
             return fireworksAnimationPool;
         }else{
             return fireworksAnimationPool;

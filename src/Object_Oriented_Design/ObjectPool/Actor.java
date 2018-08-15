@@ -16,10 +16,34 @@
  */
 package Object_Oriented_Design.ObjectPool;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * Fireworks
+ * Multi threaded actors
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}gmail.com{@literal >}
  */
-public class FireworksAnimation {
-    
+public class Actor implements Runnable {
+
+    @Override
+    public void run() {
+
+        FireworksAnimation fireworks ;
+        FireworksAnimationPool pool;
+        for (int i = 0; i < 6; i++) {
+            pool = FireworksAnimationPool.getInstance();
+            //check out
+            fireworks = pool.checkOut();
+            try {
+                //use object
+                Thread.sleep(3000); //attempting to use the object for longer than MAX_CHECK_OUT_TIME
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Actor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //check back in
+            pool.checkIn(fireworks);
+        }
+    }
+
 }

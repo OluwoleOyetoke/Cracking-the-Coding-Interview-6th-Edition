@@ -23,7 +23,7 @@ import java.util.HashMap;
  * list. FOLLOW UP How would you solve this problem if a temporary buffer is not
  * allowed?....page 94S
  *
- * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}gmail.com{@literal >}
  */
 public class Question_1 {
 

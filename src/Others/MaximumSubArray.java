@@ -22,7 +22,7 @@ import java.util.Arrays;
  * Write an efficient program to find the sum of contiguous subarray within a
  * one-dimensional array of numbers which has the largest sum.
  *
- * @author Oluwole Oyetoke <oluwoleoyetoke@gmail.com>
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}gmail.com{@literal >}
  */
 public class MaximumSubArray {
 
@@ -30,6 +30,7 @@ public class MaximumSubArray {
      * Use Kadanes algorithm
      *
      * @param input input array
+     * @return answer solution
      */
     public int solve(int[] input) {
         if (input == null) {

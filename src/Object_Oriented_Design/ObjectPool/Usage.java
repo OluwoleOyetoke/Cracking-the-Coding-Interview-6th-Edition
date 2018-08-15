@@ -17,21 +17,29 @@
 package Object_Oriented_Design.ObjectPool;
 
 /**
- *
- * @author Oluwole Oyetoke oluwoleoyetoke at gmail.com
+ *  Test class
+  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}gmail.com{@literal >}
  */
 public class Usage {
+    /*
     public static void main(String[] args){
-        FireworksAnimationPool  pool = FireworksAnimationPool.getInstance();
-        
-        //check out
-        FireworksAnimation fireworks = pool.checkOut();
-        
-        
-        //use object
-        
-        
-        //check back in
-        pool.checkIn(fireworks);
+        Actor actor = new Actor();
+        Thread thread1 = new Thread(actor, "Actor 1");
+        thread1.start();
+        Thread thread2 = new Thread(actor, "Actor 2");
+        thread2.start();
+        Thread thread3 = new Thread(actor, "Actor 3");
+        thread3.start();
+        Thread thread4 = new Thread(actor, "Actor 4");
+        thread4.start();
+        Thread thread5 = new Thread(actor, "Actor 5");
+        thread5.start();
+        Thread thread6 = new Thread(actor, "Actor 6");
+        thread6.start();
+        Thread thread7 = new Thread(actor, "Actor 7");
+        thread7.start();
+        Thread thread8 = new Thread(actor, "Actor 8");
+        thread8.start();
     }
+*/
 }
