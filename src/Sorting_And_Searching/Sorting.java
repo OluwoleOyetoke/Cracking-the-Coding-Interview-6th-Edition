@@ -19,7 +19,7 @@ package Sorting_And_Searching;
 import java.util.Arrays;
 
 /**
- *
+ * Sorting
  * @author Oluwole Oyetoke {@literal <}
  * oluwoleoyetoke{@literal @}gmail.com{@literal >}
  */
