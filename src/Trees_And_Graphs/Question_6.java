@@ -40,7 +40,7 @@ public class Question_6 {
         if (root == null) {
             return;
         }
-
+        
         inOrderTraversal(root.left, toFind);
         if (root.value == toFind) {
             int sucessor = 0;

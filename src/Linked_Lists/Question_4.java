@@ -157,8 +157,9 @@ public class Question_4 {
             linkedList.head = firstLeft;
             left.nextNode = null;
             linkedList.tail = left;
-        }
+        }else{
         left.nextNode = firstRight;
+        }
         return linkedList;
     }
 

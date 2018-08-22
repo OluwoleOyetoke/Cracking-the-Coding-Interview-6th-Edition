@@ -116,10 +116,9 @@ public class Question_8 {
         if (right != null) {
             return right;
         }else{
-          return null;  
+            return null;
         }
 
-        
     }
 
     /**
@@ -143,5 +142,5 @@ public class Question_8 {
         Question_8 q8 = new Question_8();
         q8.solve(bst, a, b);
     }
-*/
+     */
 }

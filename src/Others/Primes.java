@@ -33,7 +33,9 @@ public class Primes {
     public void findPrimes(int m) {
         int[] base = new int[m - 1];
         for (int i = 0; i < base.length; i++) {
+            if(i+2<=m){
             base[i] = i + 2;
+            }
         }
 
         int hops = 0;
