@@ -33,7 +33,6 @@ public class FirstNonRepeating {
      */
     public void firstNonRepeating(char[] input) {
         int[] characterCount = new int[256];
-        HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < input.length; i++) {
             characterCount[input[i]]++;
         }
@@ -46,7 +45,7 @@ public class FirstNonRepeating {
     }
     /**
      * Method 2: Use hash map to track occurence
-     * @param input 
+     * @param input input char array
      */
     public void firstNonRepeating2(char[] input) {
         HashMap<Character, Integer> map = new HashMap<>();

@@ -87,7 +87,7 @@ public class Islands {
     }
 
     /**
-     * Dind minimum in surrounding island
+     * Find minimum in surrounding island
      *
      * @param auxGraph modified graph
      * @param x x coordinate to start from
