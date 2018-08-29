@@ -182,12 +182,12 @@ public class Islands {
         System.out.println("\n");
     }
 
-/**
- * Main method...uncomment to run
- *
- * @param args command line arguments
+    /**
+     * Main method...uncomment to run
+     *
+     * @param args command line arguments
  *//*
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Islands islands = new Islands();
         islands.numberOfIslands();
         islands.largestSquareIsland();
