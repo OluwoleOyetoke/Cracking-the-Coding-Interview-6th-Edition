@@ -158,7 +158,7 @@ public class Question_4 {
             left.nextNode = null;
             linkedList.tail = left;
         }else{
-        left.nextNode = firstRight;
+            left.nextNode = firstRight;
         }
         return linkedList;
     }
@@ -177,7 +177,6 @@ public class Question_4 {
         linkedList.add(10);
         linkedList.add(2);
         linkedList.add(1);
-
         System.out.println("BEFORE PARTITIONING: ");
         System.out.println(linkedList.thisToString());
 

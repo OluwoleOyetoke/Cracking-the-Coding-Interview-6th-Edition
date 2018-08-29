@@ -115,8 +115,10 @@ public class Question_7 {
      * @return list reversed list
      */
     public static MySinglyLinkedList reverse(MySinglyLinkedList list) {
-        if (list == null || list.size() < 2) {
+        if (list == null || list.size() < 1) {
             return null;
+        } else if (list.size() == 1) {
+            return list;
         }
         MySinglyLinkedList.Node previous = list.head;
         MySinglyLinkedList.Node current = list.head.nextNode;
@@ -205,9 +207,10 @@ public class Question_7 {
         }
         return null;
     }
-    
+
     /**
      * Just a resolve
+     *
      * @param listA list 1
      * @param listB list 2
      * @return intersection node where intersection happened (if any)
@@ -243,7 +246,7 @@ public class Question_7 {
         }
         int counter = 1;
         while (itterator != null) {
-            if(itterator.equals(normal)){
+            if (itterator.equals(normal)) {
                 return itterator;
             }
             if (counter <= difference) {
