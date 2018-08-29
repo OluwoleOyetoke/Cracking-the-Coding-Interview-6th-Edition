@@ -17,6 +17,8 @@
 package Others;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * <b>Matrix Operations</b>
@@ -74,9 +76,10 @@ public class Matrix {
         }
         return matrix;
     }
-    
+
     /**
      * Print out matrix normally
+     *
      * @param matrix matrix to print
      */
     public void printMatrix(int[][] matrix) {
@@ -96,16 +99,17 @@ public class Matrix {
         }
         System.out.println("\n");
     }
-    
+
     /**
      * Print matrix diagonally
+     *
      * @param matrix matrix to print
      */
-     public void diagonalPrint(int[][] matrix) {
+    public void diagonalPrint(int[][] matrix) {
         if (matrix == null) {
             return;
         }
-          //System.out.println("\n");
+        //System.out.println("\n");
         int x = 0;
         int y = 0;
         for (int i = 0; i < matrix.length; i++) {
@@ -123,20 +127,20 @@ public class Matrix {
         for (int j = 1; j < matrix[0].length; j++) {
             System.out.println("");
             x = j;
-            y = matrix[0].length-1;
+            y = matrix[0].length - 1;
             System.out.print(matrix[x][y] + ", ");
-            for (int k = 0; k < matrix[0].length-j-1; k++) {
+            for (int k = 0; k < matrix[0].length - j - 1; k++) {
                 x = x + 1;
                 y = y - 1;
                 System.out.print(matrix[x][y] + ", ");
             }
         }
-          System.out.println("\n");
+        System.out.println("\n");
     }
-
 
     /**
      * Print matrix in spiral order
+     *
      * @param matrix matrix to print
      */
     public void printInSpiral(int[][] matrix) {
@@ -151,74 +155,142 @@ public class Matrix {
         int width = matrix[0].length;
         int height = matrix.length;
 
-        int lengthA = width-1;
+        int lengthA = width - 1;
         int lengthB = height - 2;
         int lengthC = width - 2;
         int lengthD = height - 3;
-        int start=0, stop=0,same=0,round=0,cnt=0, lastStop = 0, count=0, direction=0;
+        int start = 0, stop = 0, same = 0, round = 0, cnt = 0, lastStop = 0, count = 0, direction = 0;
         while (cnt != (width * height)) {
-            
+
             switch (direction) {
                 case 0:
                     start = round;
-                    stop = start+lengthA;
+                    stop = start + lengthA;
                     same = round;
                     for (int i = start; i <= stop; i++) {
-                        System.out.print(matrix[same][i]+", ");
+                        System.out.print(matrix[same][i] + ", ");
                         count++;
-                    } 
-                    lastStop = stop; 
-                    lengthA = lengthA-2;
-                    direction=1;
-                    break;
-                case 1:
-                    start = round+1;
-                    stop = start+lengthB;
-                    same = lastStop;
-                    for (int i = start; i <= stop; i++) {
-                              System.out.print(matrix[i][same]+", ");
-                              count++;
-                    }  
-                    lastStop = stop;
-                    lengthB = lengthB-2;
-                    direction=2;
-                    break;
-                case 2:
-                    start = width-round-2;
-                    stop = start-lengthC;
-                    same = lastStop;
-                    for (int i = start; i >= stop; i--) {
-                          System.out.print(matrix[same][i]+", ");
-                          count++;
                     }
                     lastStop = stop;
-                    lengthC = lengthC-2;
-                    direction=3;
+                    lengthA = lengthA - 2;
+                    direction = 1;
                     break;
-                case 3:
-                    start = height-round-2;
-                    stop = start-lengthD;
+                case 1:
+                    start = round + 1;
+                    stop = start + lengthB;
+                    same = lastStop;
+                    for (int i = start; i <= stop; i++) {
+                        System.out.print(matrix[i][same] + ", ");
+                        count++;
+                    }
+                    lastStop = stop;
+                    lengthB = lengthB - 2;
+                    direction = 2;
+                    break;
+                case 2:
+                    start = width - round - 2;
+                    stop = start - lengthC;
                     same = lastStop;
                     for (int i = start; i >= stop; i--) {
-                        System.out.print(matrix[i][same]+", ");
-                        count++;   
-                    }  
-                    lengthD = lengthD-2;
-                    direction=0;
+                        System.out.print(matrix[same][i] + ", ");
+                        count++;
+                    }
+                    lastStop = stop;
+                    lengthC = lengthC - 2;
+                    direction = 3;
+                    break;
+                case 3:
+                    start = height - round - 2;
+                    stop = start - lengthD;
+                    same = lastStop;
+                    for (int i = start; i >= stop; i--) {
+                        System.out.print(matrix[i][same] + ", ");
+                        count++;
+                    }
+                    lengthD = lengthD - 2;
+                    direction = 0;
                     break;
                 default:
                     count++;
                     break;
             }
             cnt++;
-            if(cnt%4==0){
-              round++;   
+            if (cnt % 4 == 0) {
+                round++;
             }
         }
     }
-    
+
+    /**
+     * Direction enum
+     */
+    enum Direction {
+        right,
+        down,
+        left,
+        up
+    }
+
+    /**
+     * Another way of printing out a matrix inspiral format
+     *
+     * @param matrix matrix to print
+     */
+    public void printSpiral(int[][] matrix) {
+        Queue<Direction> directionQueue = new LinkedList<Direction>();
+        directionQueue.add(Direction.right);
+        directionQueue.add(Direction.down);
+        directionQueue.add(Direction.left);
+        directionQueue.add(Direction.up);
+        Direction direction = directionQueue.peek();
+        int width = matrix[0].length;
+        int height = matrix.length;
+        int temp = Math.max(matrix.length, matrix[0].length);
+        int round = (int) Math.ceil((double) temp / 2);
+        int count = 0;
+        int innerCounter = 0;
+        int start = 0;
+        int stop = width - 1 - count;
+        while (count < round) {
+            innerCounter = 0;
+
+            if (stop == start) {
+                System.out.print(matrix[stop][stop]);
+                break;
+            }
+            if (direction == Direction.right) {
+                while ((start + innerCounter) < stop) {
+                    System.out.print(matrix[count][start + innerCounter] + ", ");
+                    innerCounter++;
+                }
+            } else if (direction == Direction.down) {
+                while ((start + innerCounter) < stop) {
+                    System.out.print(matrix[start + innerCounter][stop] + ", ");
+                    innerCounter++;
+                }
+
+            } else if (direction == Direction.left) {
+                while ((start + innerCounter) < stop) {
+                    System.out.print(matrix[stop][stop - innerCounter] + ", ");
+                    innerCounter++;
+                }
+            } else if (direction == Direction.up) {
+                while ((start + innerCounter) < stop) {
+                    System.out.print(matrix[stop - innerCounter][start] + ", ");
+                    innerCounter++;
+                }
+                count++;
+                start = count;
+                stop = width - 1 - count;
+            }
+            directionQueue.add(directionQueue.poll());
+            direction = directionQueue.peek();
+        }
+    }
+
     /**
      * Main Method....uncomment to run
+     *
      * @param args command line argument
      *//*
     public static void main(String[] args) {
@@ -230,14 +302,16 @@ public class Matrix {
         Matrix mat = new Matrix();
         System.out.println("Initial Matrix");
         mat.printMatrix(matrix);
-            System.out.println("Diagonal Print\n");
+        System.out.println("Diagonal Print\n");
         mat.diagonalPrint(matrix);
-          System.out.println("Spiral Print\n");
+        System.out.println("\nSpiral Print\n");
         mat.printInSpiral(matrix);
+        System.out.println("\nSpiral Print 2\n");
+        mat.printSpiral(matrix);
         //int[][] x = {{2,5}, {6,7}};
         int[][] rotated = mat.rotateMatrixNxN(matrix);
-        System.out.println("Rotated Matrix");
+        System.out.println("\nRotated Matrix");
         mat.printMatrix(rotated);
-    }
-*/
+    }*/
+
 }
