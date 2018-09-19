@@ -14,93 +14,104 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
+package Others;;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  *
  * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
 public class LruCache {
-
-    class Node {
-
-        Node left;
-        Node right;
-        String content;
-        String key;
-
-        Node(String con) {
-            content = con;
-        }
-    }
-
+    
+    HashMap<String, WebPage> lookupMap;
     int CACHE_SIZE;
-    HashMap<String, Node> lookupMap = new HashMap<>();
-    Queue<Node> cache = new LinkedList<>();
-    Node head;
-    Node tail;
+    int CURRENT_SIZE;
+    WebPage first;
+    WebPage last;
 
     LruCache(int size) {
         CACHE_SIZE = size;
+        lookupMap = new HashMap<>();
     }
 
-    public Node UseNode(String key) {
-        if (lookupMap.containsKey(key)) {
-            Node node = lookupMap.get(key);
-            removeNode(node);
-            addToTop(node);
-            return node;
+    public WebPage goToPage(String url) {
+        if (lookupMap.containsKey(url)) {
+            WebPage page = lookupMap.get(url);
+            removeNode(page);
+            addToTop(page);
+            return page;
         } else {
-            return null;
+            System.out.println("Page Not in cache. Go to main memory");
+            String content = getPageFromMainMemory();
+            addPageToCache(url, content);
+            return goToPage(url); 
         }
     }
 
-    public void putNode(String key, String value) {
-        if (lookupMap.containsKey(key)) {
-            Node present = lookupMap.get(value);
-            present.content = value;
-            removeNode(present);
-            addToTop(present);
-        } else {
-            Node newNode = new Node(value);
-            newNode.key = key;
-            if (cache.size() >= CACHE_SIZE) {
-                lookupMap.remove(tail.key);
-                removeNode(tail);
+    public void addPageToCache(String url, String content) {
+            WebPage newNode = new WebPage(content);
+            newNode.url = url;
+            if (CURRENT_SIZE >= CACHE_SIZE) {
+                lookupMap.remove(last.url);
+                removeNode(last);
                 addToTop(newNode);
             } else {
                 addToTop(newNode);
+                CURRENT_SIZE++;
             }
-        }
-
+            
     }
-
-    public void removeNode(Node node) {
-        if (node.left != null) {
-            node.left.right = node.right;
-        } else {
-            head = node.right;
-        }
-        if (node.right != null) {
-            node.right.left = node.left;
-        } else {
-            tail = node.left;
+    
+    public void editPageInCache(String url, String content){
+        if (lookupMap.containsKey(url)) {
+            WebPage present = lookupMap.get(url);
+            present.content = content;
+            removeNode(present);
+            addToTop(present);
         }
     }
 
-    public void addToTop(Node node) {
-        node.right = head;
-        node.left = null;
-        if (head != null) {
-            head.left = node;
-            head = node;
+    public void removeNode(WebPage node) {
+        if (node.before != null) {
+            node.before.after = node.after;
+        } else {
+            first = node.after;
         }
-        if (tail == null) {
-            tail = head;
+        if (node.after != null) {
+            node.after.before = node.before;
+        } else {
+            last = node.before;
+        }
+        CURRENT_SIZE--;
+    }
+
+    public void addToTop(WebPage node) {
+        node.after = first;
+        node.before = null;
+        if (first != null) {
+            first.before = node;
+            first = node;
+        }
+        if (last == null) {
+            last = first;
+        }
+    }
+    
+    public String getPageFromMainMemory(){
+        return "def_content";
+    }
+    
+    
+        
+    class WebPage {
+        WebPage before;
+        WebPage after;
+        String url;
+        String content;
+
+        WebPage(String con) {
+            content = con;
         }
     }
 }
