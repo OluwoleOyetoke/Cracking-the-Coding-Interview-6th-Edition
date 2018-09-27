@@ -32,7 +32,12 @@ import java.util.Map.Entry;
  * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
 public class SortString {
-
+    
+    
+    /**
+     * Sort string based on frequency of occurence
+     * @param given given string
+     */
     public void rearrange(String given) {
         if(given==null || given.length()==0){
             return;
@@ -80,10 +85,14 @@ public class SortString {
            }
            System.out.println("\n");
     }
-
+    
+    /**
+     * String sorting Main Method
+     * @param args command line arguments
+     *//*
     public static void main(String[] args) {
         String given = "25285688";
         SortString sort = new SortString();
         sort.rearrange(given);
-    }
+    }*/
 }
