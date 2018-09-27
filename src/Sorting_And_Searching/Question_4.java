@@ -35,9 +35,9 @@ public class Question_4 {
      * Find a number in a sorted list where we cannot ascertain the size of the
      * list at search time
      *
-     * @param toFind
-     * @param list
-     * @return
+     * @param toFind to find
+     * @param list list
+     * @return true/false true if found and false, otherwise
      */
     public boolean find(int toFind, Listy list) {
         int previousIndex = 0;
