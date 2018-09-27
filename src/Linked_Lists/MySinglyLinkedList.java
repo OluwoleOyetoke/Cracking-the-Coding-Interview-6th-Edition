@@ -19,7 +19,8 @@ package Linked_Lists;
 import java.util.Comparator;
 
 /**
- *Singly linked list implementation
+ * Singly linked list implementation
+ *
  * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  */
 public class MySinglyLinkedList<Type> implements Comparable {
@@ -28,14 +29,15 @@ public class MySinglyLinkedList<Type> implements Comparable {
     public Node tail = new Node();
     public int size;
 
-    MySinglyLinkedList() {
+    public MySinglyLinkedList() {
         head = null;
         tail = null;
         size = 0;
     }
-    
+
     /**
      * Add content to linked list
+     *
      * @param content content to add
      * @return true/false return true if successful and false if otherwise
      */
@@ -102,11 +104,13 @@ public class MySinglyLinkedList<Type> implements Comparable {
         }
         return true;
     }
-    
+
     /**
      * Add content as the head of the linked list
+     *
      * @param content content to add
-     * @return true/false returns true if add was successful and false if otherwise
+     * @return true/false returns true if add was successful and false if
+     * otherwise
      */
     public boolean addFirst(Type content) {
         if (content == null) {
@@ -126,11 +130,13 @@ public class MySinglyLinkedList<Type> implements Comparable {
             return true;
         }
     }
-    
-     /**
+
+    /**
      * Add content as the tail of the linked list
+     *
      * @param content content to add
-     * @return true/false returns true if add was successful and false if otherwise
+     * @return true/false returns true if add was successful and false if
+     * otherwise
      */
     public boolean addLast(Type content) {
         if (content == null) {
@@ -271,8 +277,8 @@ public class MySinglyLinkedList<Type> implements Comparable {
         }
         return null;
     }
-    
-     /**
+
+    /**
      * Returns node in a particular index (if index exists)
      *
      * @param index index to search in
@@ -472,26 +478,62 @@ public class MySinglyLinkedList<Type> implements Comparable {
      * list
      */
     public int size() {
-        int count=0;
+        int count = 0;
         Node current = this.head;
-        while(current!=null){
+        while (current != null) {
             count++;
             current = current.nextNode;
         }
-        this.size=count;
+        this.size = count;
         return this.size;
     }
 
     /**
      * Sorts the content of the list (based on its content) and return a sorted
-     * version of th linked list
+     * version of th linked list. Merge sort used. Note: Content of list should
+     * be integer
      *
      * @return singlyLinkedList sorted list
      */
     public MySinglyLinkedList<Type> sort() {
-        //Use merge sort--- Implement later
-        MySinglyLinkedList<Type> singlyLinkedList = this;
-        return singlyLinkedList;
+        if (this == null) {
+            return null;
+        } else {
+            return sort(this, 0, size - 1);
+        }
+    }
+
+    private MySinglyLinkedList<Type> sort(MySinglyLinkedList<Type> list, int start, int stop) {
+        MySinglyLinkedList<Type> newList = new MySinglyLinkedList<>();
+
+        if (stop == start) {
+            newList.add(list.get(start));
+            return newList;
+        }
+        int pivot = (int) Math.floor(((double) (start + stop) / 2));
+
+        MySinglyLinkedList<Type> left = sort(list, start, pivot);
+        MySinglyLinkedList<Type> right = sort(list, pivot + 1, stop);
+
+        int leftIndex = 0;
+        int rightIndex = 0;
+
+        while (leftIndex < left.size || rightIndex < right.size) {
+            if (leftIndex >= left.size) {
+                newList.add(right.get(rightIndex));
+                rightIndex++;
+            } else if (rightIndex >= right.size) {
+                newList.add(left.get(leftIndex));
+                leftIndex++;
+            } else if ((Integer) left.get(leftIndex) <= (Integer) right.get(rightIndex)) {
+                newList.add(left.get(leftIndex));
+                leftIndex++;
+            } else {
+                newList.add(right.get(rightIndex));
+                rightIndex++;
+            }
+        }
+        return newList;
     }
 
     /**
@@ -674,10 +716,11 @@ public class MySinglyLinkedList<Type> implements Comparable {
             }
         }
     }
-    
+
     /**
-     * Main method to
-     * to test Singly Linked List implementation....uncomment to run
+     * Main method to to test Singly Linked List implementation....uncomment to
+     * run
+     *
      * @param args command line arguments
      *//*
     public static void main(String[] args) {
