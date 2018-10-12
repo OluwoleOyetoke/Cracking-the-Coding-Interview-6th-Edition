@@ -45,7 +45,7 @@ This repositiory contains my personal Java solutions to questions in Gayle McDow
 node.
   * Pad both linked list to same size. Begin iteration from the head of both list. If intersection exists, the two pointers for list a and list b will eventually meet.
 * ***Question 8:*** Given a circular linked list, implement an algorithm that returns the node at the beginning of the loop.
-  * Use runner technique i.e pointer b running 2x as fast as pointer a. to determine. At first intersection revert pointer a back to head of list, begin incrementing pointer a and b 1 step per time. The point of next intersection is the begining of the loop
+  * Use runner technique i.e pointer b running 2x as fast as pointer a. to determine. At first intersection revert pointer a back to head of list, begin incrementing pointer a and b 1 step per time. The point of next intersection is the begining of the loop. [Interesting discussions about this here](https://stackoverflow.com/questions/1103522/what-is-an-efficient-algorithm-to-find-whether-a-singly-linked-list-is-circular)
 
 ## CHAPTER 3 - Stacks and Queues
 ### Data Structure (Implemented)
@@ -108,17 +108,154 @@ must be built before the project is. Find a build order that will allow the proj
   
   
 ## CHAPTER 5 - Bit Manipulation
+### Questions
+* ***Question 1:*** Write a method to insert binary a of length N between index i and j of binary b
+* ***Question 2:*** Given a real number between O and 1 (e.g., 0.72) print the binary representation
+  * while(true){multiply current value by 2 to get newVlue. If result >=1, add one to  your result string, else 0. Subract 1 from newValue to get nextIterationCurrentValue. Repeat the iteration with this nextIterationCurrentValue. Stop iteration if nextIterationCurrentValue=0 or result string length is  > 32
+  }
+* ***Question 3:*** You have an integer and you can flip exactly one bit from a 0 to a 1. Write code tofind the length of the longest sequence of ls you could create.
+  * Iterate through, flip as you iterate. Maintain count as iteration progresses
+* ***Question 4:*** Given a positive integer, print the next smallest and the next largest number that have the same number of 1 bits in their binary representation.
+  * [Simplified explanation here](https://martinm2w.wordpress.com/2012/06/03/5-3-bits-next-smallest-and-largest-have-the-same-no-of-1s/)
+* ***Question 5:*** Explain what the following code does: ( ( n & ( n-1)) == 0).
+* ***Question 6:*** Write a function to determine the number of bits you would need to flip to convert integer A to integer B.
+  * Leverage binary XOR
+* ***Question 7:*** Write a program to swap odd and even bits in an integer with as few instructions as possible (e.g., bit 0 and bit 1 are swapped, bit 2 and bit 3 are swapped, and so on).
+  * Use Max 0xAAAAAAAA and 0x55555555
+* ***Question 8:*** Drawline
 
 ## CHAPTER 6 - Math and Logic Puzzles
-
+### Concepts (Understood)
+* Prime Numbers
+* Probability
+  * Mutually Exclusive
+  * Mutually Non-Exclusive
+* Power of 2 and Log(base 2)
+###Questions
+* ***Question 1:*** The Heavy Pill.
+* ***Question 2:*** Basketball
+* ***Question 3:*** Dominos
+* ***Question 4:*** Ants on a Triangle
+* ***Question 5:*** Jugs of Water
+* ***Question 6:*** Blue Eyed Island
+* ***Question 7:*** The Apocalypse
+* ***Question 8:*** The Egg Drop Problem
+* ***Question 9:*** 100 Lockers
+* ***Question 10:*** Poisson
+  
+  
 ## CHAPTER 7 - Object Oriented Design
+### Design Paterns (Implemented)
+* Builder Pattern
+* Singleton
+* Factory Pattern
+* Abstract Factory Pattern
+* Model - View - Controller
+* Strategy Pattern
+* Observer Pattern
+* Object Pool Pattern
+### Design Documentation
+* Class Diagram 
+* Activty Diagram
+* Sequence Diagram
+* Object Diagram
+* Usecase DiagramClass 
+###Questions
+* ***Question 1:*** Call Center: Imagine you have a call center with three levels of employees: respondent, manager,
+and director. An incoming telephone call must be first allocated to a respondent who is free. Implement a method dispatchCall() which assigns a call to the first available employee. Hierarchy respondent -> manager -> director
+* ***Question 4:*** Design a parking lot using object-oriented principles.
+* ***Other:*** Use Java concurrency util package to make a design for concurrent task execution
 
 ## CHAPTER 8 - Recursion and Dynamic Programming
+###Questions
+* ***Question 1:*** A child is running up a staircase with n steps and can hop either 1 step, 2 steps, or 3
+steps at a time. Implement a method to count how many possible ways the child can run up the
+stairs.
+  * Recursive approach. Perform all possible steps at each point on in stair case. Return when the top of the staircase is rached. Discard if the top of the staircase is overshot.
+* ***Question 2:*** a robot sitting on the upper left corner of grid with r rows and c columns. The robot can only move in two directions. Design an algorithm to find a path for the robot from the top left to the bottom right.
+  * At every point in time, make all feasible moves. Recursively continue to make all feasible move on every cell landd on. Stop when the bottom right corner is reached. 
+* ***Question 3:*** Magic Index
+* ***Question 4:*** Write a method to return all subsets of a set
+  * Considering every member of the set as a binary member which could be there (1) or not there (0), we will be abel to find all members of the set by assumin the set to be a binary of length *setLength* and finding all possible permutations of this binary
+* ***Question 5:*** Write a recursive function to multiply two positive integers without using the operator.You can use addition, subtraction, and bit shifting, but you should minimize the number of those operations.
+  * Interesing method here: [Russian Peasantly Method](https://stackoverflow.com/a/50639778/3151251)
+* ***Question 6:*** Towers of Hanoi
+  * The stack in the middle is simple meant for transmission  and temporary storage
+* ***Question 7:*** Permutations without Dups: Write a method to compute all permutations of a string of unique characters.
+  * Backtracking
+* ***Question 8:*** Write a method to compute all permutations of a string whose characters are not necessarily unique. The list of permutations should not have duplicates.
+  * Backtrack, but before any iteration, check if current character is present ahead.
+* ***Question 9:*** Parens: Implement an algorithm to print all valid (e.g., properly opened and closed) combinations of n pairs of parentheses.
+  * Assume (=-1 and )=+1. If we start iterating through the string from the left and adding up the equivalent integer value of the brackets, at no point will the cumulative sum be > 0. Also, at the end of the string, the cummulative sum must be zero.
+* ***Question 10:*** Paint Fill
+* ***Question 11:*** Coins: Given an infinite number of quarters (25 cents), dimes (10 cents), nickels (5 cents), and pennies (1 cent), write code to calculate the number of ways of representing n cents.
+  * Recursively find all possible cents combinations that will lead to the number of cents n
+* ***Question 12:*** Eight Queens: Write an algorithm to print all ways of arranging eight queens on an 8x8 chess board
+so that none of them share the same row, column, or diagonal. In this case, "diagonal" means all
+diagonals, not just the two that bisect the board.
+  * Recursively check for suitable place to place queen, Check if it is okay to place queen in current spot by checking if in same column and check if there is any diagonal to it by calculating that the distance between the columns (with queen) equals the distance
+         between the rows, then they're in the same diagonal.
+* ***Question 13:*** Stack of Boxes
+* ***Question 14:*** Boolean Evaluation
 
 ## CHAPTER 9 - System Design and Scalability
+### Concepts (Understood)
+* Distribution & Connectivity
+  * Horizontal and vertical scaling
+  * Load balancing
+  * Aynchronuous processing
+* Data Management
+  * Database partitioning (Vertical, hash-based, directory-based)
+  * Database denormalization
+  * Caching
+  * Map reduce
+  * Compression
+* Distributed Systems Considerations
+  * Read vs Write Heavy?
+  * Availability (Real-time vs Pre-processed) 
+  * Highly vs Moderately secure
+* Data Sharding 
+* Probability
+  * Mutually Exclusive
+  * Mutually Non-Exclusive
+* Power of 2 and Log(base 2)
+###Questions
+* ***Question 1:*** Stock Data
+* ***Question 2:*** Social Network
+* ***Question 3:*** Web Crawler
+* ***Question 4:*** Duplicate URLs
+* ***Question 5:*** Cache
+* ***Question 6:*** Sales Rank
+* ***Question 7:*** Personal Financial Manager
+* ***Question 8:*** Pastebin
+* ***Other:*** Build a search engine sing the MESI cache coherence protocol
 
 ## CHAPTER 10 - Sorting and Searching
-
+### Algorithms
+* Bubble Sort
+* Selection Sort
+* Insertion Sort
+* merge Sort
+* Quick Sort
+* Binary Search
+###Questions
+* ***Question 1:*** You are given two sorted arrays, A and B, where A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
+  * Merge Array a and b together by starting with the buffer space at the back
+* ***Question 2:*** Write a method to sort an array of strings so that all the anagrams are next to each other.
+  * Use a custom implemented comparator which helps to bring anagrams in an array closer to each other
+* ***Question 3:*** Search in Rotated Array
+  * Use some kind of adapted binary search
+* ***Question 4:*** Sorted Search, No Size:
+* ***Question 5:*** Given a sorted array of strings that is interspersed with empty strings, write a method to find the location of a given string.
+* ***Question 6:*** Imagine you have a 20 GB file with one string per line. Explain how you would sort the file.
+* ***Question 7:*** Given an input file with four billion non-negative integers, provide an algorithm to
+generate an integer that is not contained in the file. Assume you have 1 GB of memory available for
+this task.
+* ***Other 1:*** Rotate and array in place
+  * Rotate array by reversing its content in a particular order (Reversal Algorithm). [More details here](https://stackoverflow.com/a/31175162/3151251)
+* ***Other 2:*** iven a string, rearrange it in decreasing order by the characters frequency and in lexicographical order if their frequency is equal.
+  * Use a hash map to track chracter vs number of occurence. Convert hash map to entry set. place entry set in list. sort list using a custom comparator.
+  * Use a tree map
 ## CHAPTER 11 - Testing
 
 ## CHAPTER 12 - C and C++
