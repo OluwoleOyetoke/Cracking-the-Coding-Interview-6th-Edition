@@ -199,6 +199,7 @@ diagonals, not just the two that bisect the board.
 * ***Question 14:*** Boolean Evaluation
 
 ## CHAPTER 9 - System Design and Scalability
+
 ### Concepts (Understood)
 * Distribution & Connectivity
   * Horizontal and vertical scaling
@@ -219,7 +220,9 @@ diagonals, not just the two that bisect the board.
   * Mutually Exclusive
   * Mutually Non-Exclusive
 * Power of 2 and Log(base 2)
+
 ###Questions
+
 * ***Question 1:*** Stock Data
 * ***Question 2:*** Social Network
 * ***Question 3:*** Web Crawler
@@ -238,6 +241,7 @@ diagonals, not just the two that bisect the board.
 * merge Sort
 * Quick Sort
 * Binary Search
+
 ###Questions
 * ***Question 1:*** You are given two sorted arrays, A and B, where A has a large enough buffer at the end to hold B. Write a method to merge B into A in sorted order.
   * Merge Array a and b together by starting with the buffer space at the back
@@ -256,7 +260,16 @@ this task.
 * ***Other 2:*** iven a string, rearrange it in decreasing order by the characters frequency and in lexicographical order if their frequency is equal.
   * Use a hash map to track chracter vs number of occurence. Convert hash map to entry set. place entry set in list. sort list using a custom comparator.
   * Use a tree map
+  
 ## CHAPTER 11 - Testing
+
+###Questions
+* ***Question 1:*** Mistake
+* ***Question 2:*** Random Crashes
+* ***Question 3:*** ChessTest
+* ***Question 4:*** How would you load test a webpage without using any test tools?
+* ***Question 5:*** How would you test a pen?
+* ***Question 6:*** How would you test an ATM in a distributed banking system?
 
 ## CHAPTER 12 - C and C++
 
@@ -271,3 +284,30 @@ this task.
 ## CHAPTER 17 - Hard
 
 ## Others
+* ***Browser History:*** Create a LRU cache to print web history based on recently visited sites
+  * Use combination of hash map and a doubly linked list
+* ***Dijkstra:*** Find shortest path between two cities
+  * Use priority queue to implement dijstra algorithm
+* ***Question 3:*** Find the first non repeating character in an array
+  * Use hash map to track occurrence
+  * Assuming characters are only asci based, use character count array to track occurrence
+* ***Unique Islands:*** In a square matrix where 1 represents islands and 0 non-islands, find number of connected/ stand alone islands in the matrix
+  *  Run a kind of BFS on the graph to find number of connected components
+* ***Matrix:*** Rotate a matrix in place, print a matrix diagonally, print a matrix in spiral order
+* ***Maximum Sub-Array:***  Write an efficient program to find the sum of contiguous subarray within a one-dimensional array of numbers which has the largest sum.
+  * Use [Kadane's algorithm](https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm)
+* ***Palindrome:*** Find the longest palindromic substring in a string (if any)
+  * Use the Manacher's algorithm as explained in some Fred [Akalina](https://www.akalin.com/longest-palindrome-linear-time) and [Prismo Skills](https://prismoskills.appspot.com/lessons/Dynamic_Programming/Chapter_29_-_Longest_Palindrome_In_String.jsp) articles
+  * Naive implementation whereby we treate every character as a palindromic centre and try to find how long this palindrome possibly is. Keep track of the result of each attempt and take note of the largest returned value of them all. This is the longest palindrome
+* ***Primes:*** Find all the prime numbers between n and m
+  * Use [sieve of eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+* ***Rearrange String:*** Form the largest possible number from the array of number.
+  * Use a custom comparator
+* ***K-Smallest:***  Find the k smallest number from an array of numbers
+  * Use a min heap. delete mi to get the next min
+* ***Substring:*** Find longest common substring in a string
+  * Use dynamic programing
+* ***Subsequence:*** Find the longest common subsequence between two strings
+  * Use dynamic programing
+* ***Twos Sum:***  * Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+  * Use hash map
