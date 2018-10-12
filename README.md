@@ -7,7 +7,18 @@ This repositiory contains my personal solutions to questions in Gayle McDowell's
 * ***Question 2:*** Given two strings, write a method to decide if one is a permutation of the other.
   * Sort both strings and search linearly for uniformity
   * Use character count
-
+  * Find all possible palindromes of string a, check if it matches sting b (Not a recommended solution)
+* ***Question 3:*** Write a method to replace all spaces in a string with '%20'. You may assume that the string has sufficient space at the end to hold the additional characters,
+  * Start replacement from the back of the string (right to left)
+* ***Question 4:*** Given a string, write a function to check if it is a permutation of a palindrome.
+  * Use character count with regards to uniqueness in even and odd length palindrome.
+* ***Question 5:*** Given two strings, write a function to check if they are one edit (or zero edits) away.
+* ***Question 6:*** Write a function to perform run length coding on a string
+  * Iterate through string taking note of the previous char. onChange, append currentcount and restart new count.
+* ***Question 7:*** write a method to rotate an NxN matrix by 90 degrees
+* ***Question 8:*** Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are set to 0.
+* ***Question 9:*** Given two strings, sl and s2, write code to check if s2 is a rotation of sl using only one call to isSubstring
+  * Rotation here simply means left or right shift. Just as is done in binary
 ## CHAPTER 2 - Linked Lists
 
 ## CHAPTER 3 - Stacks and Queues
