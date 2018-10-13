@@ -14,32 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
+package CH09_Scalability_And_System_Design.Search_Engine;
 
-import CH02_Linked_Lists.MySinglyLinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * To test some implemented data structures
- * 
+ * Factory setting up the backend machines
+ *
  * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
-public class RandomTests {
-    
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
+public class MachineFactory {
+
+    public List<IMachine> machines = new ArrayList<>();
+    public static int NO_OF_MACHINES = 4;
+
+    public List<IMachine> getMachines() {
+        return machines;
     }
-*/
+
+    public void setMachines(List<IMachine> machines) {
+        this.machines = machines;
+    }
+
+    List<IMachine> generateMachines() {
+        for (int i = 1; i <= NO_OF_MACHINES; i++) {
+            machines.add(new Machine(i));
+        }
+        return machines;
+    }
 }

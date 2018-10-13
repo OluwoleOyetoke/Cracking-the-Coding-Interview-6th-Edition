@@ -29,7 +29,7 @@ public class Palindrome {
     int callCount = 0;
 
     /**
-     * Using the Manacher's algorithm as explained in some Fred Akalina nd
+     * Using the Manacher's algorithm as explained in some Fred Akalina and
      * Prismo Skills articles
      *
      * @see <a href="https://www.akalin.com/longest-palindrome-linear-time">Fred

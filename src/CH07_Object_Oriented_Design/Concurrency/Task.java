@@ -14,32 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
+package CH07_Object_Oriented_Design.Concurrency;
 
-import CH02_Linked_Lists.MySinglyLinkedList;
+import java.util.Random;
 
 /**
- * To test some implemented data structures
- * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ * Task concrete class
+ * @author Oluwole Oyetoke - oluwoleoyetoke at gmail.com 
  */
-public class RandomTests {
+public class Task implements ITask {
     
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
+    String id;
+    Task(String id){
+        this.id = id;
     }
-*/
+
+    @Override
+    public String toString() {
+        return "Task{" + "id=" + id + '}';
+    }
+    
+    @Override
+    public void run() {
+        Random rand = new Random();
+        //System.out.println("Generated Random Number: "+rand.nextInt(20));
+    }
+
+    @Override
+    public String getId() {
+       return this.id;
+    }
+    
 }

@@ -14,32 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package CH04_Trees_And_Graphs;
 
 /**
- * To test some implemented data structures
+ * <b>Random Node:</b> You are implementing a binary tree class from scratch which, in addition to
+ * insert, find, and delete, has a method getRandomNode() which returns a random node
+ * from the tree. All nodes should be equally likely to be chosen. Design and implement an algorithm
+ * for getRandomNode, and explain how you would implement the rest of the methods.
  * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
  */
-public class RandomTests {
+public class Question_11 {
     
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
-    }
-*/
 }

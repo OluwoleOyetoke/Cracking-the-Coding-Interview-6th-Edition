@@ -28,7 +28,7 @@ public class FirstNonRepeating {
     
     
     /**
-     * Assuming characters are only asci based. character count array to track occurence;
+     * Assuming characters are only asci based, use character count array to track occurrence;
      * @param input input char array
      */
     public void firstNonRepeating(char[] input) {

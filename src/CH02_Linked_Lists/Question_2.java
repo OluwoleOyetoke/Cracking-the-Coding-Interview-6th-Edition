@@ -14,32 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package CH02_Linked_Lists;
 
 /**
- * To test some implemented data structures
- * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ * <b>Return Kth to Last: </b>Implement an algorithm to find the kth to last
+ * element of a singly linked list.
+ *
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  */
-public class RandomTests {
-    
-    /*
-    public static void main(String[] args){
+public class Question_2 {
+
+    /**
+     * Main method for Linked List question 2.
+     * Print elements from index a to index b or the end...uncomment to run
+     *
+     * @param args Command line argument
+     *//*
+    public static void main(String[] args) {
         MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
-    }
-*/
+        for (int i = 0; i < 7; i++) {
+            linkedList.add(i * 7);
+        }
+
+        System.out.println(linkedList.subList(2, linkedList.size - 1).thisToString()); //from index a to end
+        System.out.println(linkedList.subList(0, 3).thisToString()); //from index a to index b
+    }*/
 }

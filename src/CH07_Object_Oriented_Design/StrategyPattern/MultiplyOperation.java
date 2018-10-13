@@ -14,32 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package CH07_Object_Oriented_Design.StrategyPattern;
 
 /**
- * To test some implemented data structures
- * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ *
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
+ * gmail.com{@literal >}
  */
-public class RandomTests {
-    
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
+public class MultiplyOperation implements Strategy {
+
+    @Override
+    public int doOperation(int a, int b) {
+        return a*b;
     }
-*/
+    
 }

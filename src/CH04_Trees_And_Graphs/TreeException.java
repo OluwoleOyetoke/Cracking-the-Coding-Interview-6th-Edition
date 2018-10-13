@@ -14,32 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package CH04_Trees_And_Graphs;
 
 /**
- * To test some implemented data structures
- * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ *Exception for the trees
+ * @author Oluwole Oyetoke {@literal <}oluwoleoyetoke {@literal @}
  */
-public class RandomTests {
+public class TreeException extends Exception {
     
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
+    TreeException(){
+        super();
     }
-*/
+    
+    TreeException(String message){
+        super(message);
+    }
+    
 }

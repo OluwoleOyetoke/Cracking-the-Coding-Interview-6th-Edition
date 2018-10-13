@@ -14,32 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package Ch10_Sorting_And_Searching;
 
 /**
- * To test some implemented data structures
- * 
+ *Sparse Search: Given a sorted array of strings that is interspersed with empty strings, write a
+ * method to find the location of a given string.
+ * EXAMPLE
+ * Input: ball,{"at", "", "","","ball","","","car","","","dad","", ""}
+ * Output:4
  * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
  */
-public class RandomTests {
+public class Question_5 {
     
-    /*
-    public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
-        
-    }
-*/
 }

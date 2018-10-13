@@ -14,32 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Others;
-
-import CH02_Linked_Lists.MySinglyLinkedList;
+package CH07_Object_Oriented_Design.Concurrency;
 
 /**
- * To test some implemented data structures
- * 
- * @author Oluwole Oyetoke - oluwoleoyetoke@gmail.com
+ * Test class
+ * @author Oluwole Oyetoke - oluwoleoyetoke at gmail.com            
  */
-public class RandomTests {
+public class User {
     
     /*
     public static void main(String[] args){
-        MySinglyLinkedList<Integer> linkedList = new MySinglyLinkedList<>();
-        linkedList.add(3);
-        linkedList.add(5);
-        linkedList.add(8);
-        linkedList.add(5);
-        linkedList.add(10);
-        linkedList.add(2);
-        linkedList.add(1);
-        System.out.println("Before Sort");
-        System.out.println(linkedList.thisToString());
-        System.out.println("After Sort");
-        System.out.println(linkedList.sort().thisToString());
+        Scheduler scheduler= Scheduler.getInstance();
         
+        for(int i=0; i<20; i++){
+           scheduler.execute(new Task(i+"")); 
+        } 
     }
 */
 }
