@@ -1,5 +1,7 @@
 # Cracking the Coding Interview (6th Edition) - Solutions
-This repositiory contains my personal Java solutions to questions in Gayle McDowell's [Cracking the Coding Interview book](https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?s=books&ie=UTF8&qid=1539140733&sr=1-1&keywords=cracking+the+coding+interview+6th) (6th edition) and some other algorithm/data structure questions from [GeeksforGeeks dot org](https://www.geeksforgeeks.org/)
+This repositiory contains my personal Java solutions to questions in Gayle McDowell's [Cracking the Coding Interview book](https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?s=books&ie=UTF8&qid=1539140733&sr=1-1&keywords=cracking+the+coding+interview+6th) (6th edition) and some other algorithm/data structure questions from [GeeksforGeeks dot org](https://www.geeksforgeeks.org/).
+
+If you have more optimal solutions or additional solutions for some of the un covered chapters, feel free to contibute to the repo.
 
 ## CHAPTER 1 - Arrays and Strings
 ### Data Structure Implemented
@@ -285,7 +287,7 @@ diagonals, not just the two that bisect the board.
   * Use a tree map
   
 ## CHAPTER 11 - Testing
-###Frameworks Utilized
+### Frameworks Utilized
 * JUnit
 
 ### Questions *(& Solution Approach)*
