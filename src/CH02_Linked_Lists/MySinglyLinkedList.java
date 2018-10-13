@@ -510,6 +510,7 @@ public class MySinglyLinkedList<Type> implements Comparable {
             newList.add(list.get(start));
             return newList;
         }
+        
         int pivot = (int) Math.floor(((double) (start + stop) / 2));
 
         MySinglyLinkedList<Type> left = sort(list, start, pivot);
